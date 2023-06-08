@@ -18,12 +18,12 @@ const Tabs = () => {
     <Tab.Navigator screenOptions={{
         tabBarActiveTintColor: "#08812f",
         // headerShown: false,
-        tabBarShowLabel: true,
+        tabBarShowLabel: false,
     }} initialRouteName='Feed'>
         <Tab.Screen name='Feed' component={Feed} options={{
             tabBarIcon: ({focused}) => <Iconicons name='home-sharp' size={22} color={focused ? "#08812f" : "gray"}/>,
             headerShown: false,
-            
+            tabBarLabel: 'Home'
         }}/>
         <Tab.Screen name='Matches' component={Matches} options={{
             tabBarIcon: ({focused}) => <Material name='soccer-field' size={29} color={focused ? "#08812f" : "gray"}/>,
@@ -35,6 +35,7 @@ const Tabs = () => {
         <Tab.Screen name='Search' component={Search} options={{
             tabBarIcon: ({focused}) => <FontAwesome name='search' size={22} color={focused ? "#08812f" : "gray"}/>,
             headerShown: false,
+            tabBarLabel: 'Explore'
         }}/>
         <Tab.Screen name='Profile' component={Profile} options={{
             tabBarIcon: ({focused}) => <Iconicons name='person-sharp' size={22} color={focused ? "#08812f" : "gray"}/>,

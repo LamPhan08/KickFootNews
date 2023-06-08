@@ -8,20 +8,27 @@ export default StyleSheet.create({
     paddingBottom: 120,
   },
   image: {
-    height: 500,
+    height: 300,
     width: '100%',
-    borderBottomLeftRadius: 50,
-    borderBottomRightRadius: 50,
   },
-  crossContainer: {
-    position: 'absolute',
-    top: 60,
-    left: 30,
-    zIndex: 9,
+  authorPublishedContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginHorizontal: 20,
+    marginBottom: 20,
+    justifyContent: 'space-between'
   },
-  cross: {
-    height: 34,
-    width: 34,
+  authorIcon: {
+    width: 40,
+    height: 40
+  },
+  authorAndPublished: {
+    marginLeft: 10,
+    justifyContent: 'space-between'
+  },
+  name: {
+    fontWeight: '600',
+    color: '#000'
   },
   title: {
     fontSize: 24,
@@ -34,7 +41,8 @@ export default StyleSheet.create({
     fontSize: 16,
     fontWeight: '400',
     lineHeight: 22,
-    paddingHorizontal: 24,
+    paddingHorizontal: 18,
+    marginTop: 20
   },
   readMoreContainer: {
     position: 'absolute',

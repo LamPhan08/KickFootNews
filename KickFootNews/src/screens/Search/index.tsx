@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback, useState } from 'react';
-import { FlatList, RefreshControl, useColorScheme, View } from 'react-native';
+import { FlatList, RefreshControl, useColorScheme, SafeAreaView } from 'react-native';
 import uuid from 'react-native-uuid';
 import { useDispatch, useSelector } from 'react-redux';
 import { getNewsFeed } from '../../redux/actions';
@@ -16,7 +16,7 @@ const Search = () => {
   const [searchText, setSearchText] = useState('');
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <SearchInput
         searchText={searchText}
         setSearchText={setSearchText}
@@ -31,7 +31,7 @@ const Search = () => {
         )}
         style={styles.list}
       />
-    </View>
+    </SafeAreaView>
   )
 }
 

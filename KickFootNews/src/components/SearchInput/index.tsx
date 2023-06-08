@@ -39,7 +39,7 @@ export const SearchInput: React.FC <{
             returnKeyType={'search'}
         />
 
-            <EvilIcons name="search" size={30}/>
+            <EvilIcons name="search" size={30} style={{marginBottom: 5}}/>
         </View>
     )
 }

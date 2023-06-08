@@ -7,9 +7,10 @@ import Login from '../screens/Login';
 import Splash from '../screens/Splash';
 import Register from '../screens/Register';
 import Bookmark from '../screens/Bookmark';
-import Quiz from '../screens/Quiz';
 import About from '../screens/About';
 import EditProfile from '../screens/EditProfile';
+import QuizDetails from '../screens/QuizDetails';
+import Quizzes from '../screens/Quizzes';
 
 const Stack = createSharedElementStackNavigator();
 
@@ -38,11 +39,14 @@ export const RootNavigation = () => {
         <Stack.Screen name="Splash" component={Splash} options={{headerShown: false}} />
         <Stack.Screen name="Register" component={Register} options={{headerShown: false}}/>
         <Stack.Screen name="Bookmarks" component={Bookmark} options={{headerTitleAlign: 'center'}}/>
-        <Stack.Screen name="Quiz" component={Quiz} options={{headerTitleAlign: 'center'}}/>
+        <Stack.Screen name="Quizzes" component={Quizzes} options={{headerTitleAlign: 'center'}}/>
         <Stack.Screen name="About" component={About} options={{headerTitleAlign: 'center', title:'About Us'}}/>
         <Stack.Screen name="EditProfile" component={EditProfile} options={{
           title: 'Edit Profile',
           headerTitleAlign: 'center'
+        }}/>
+        <Stack.Screen name="QuizDetails" component={QuizDetails} options={{
+          headerShown: false
         }}/>
 
       </Stack.Navigator>

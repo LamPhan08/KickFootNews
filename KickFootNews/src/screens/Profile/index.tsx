@@ -1,11 +1,10 @@
 import React from 'react'
-import { Image, SafeAreaView, View, ScrollView } from 'react-native'
+import { ImageBackground, SafeAreaView, View, ScrollView } from 'react-native'
 import styles from './styles'
 import { Avatar, Title, Caption, Text, TouchableRipple } from 'react-native-paper'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import user from '../../assets/user.png'
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import quizImage from '../../assets/quizLogo.png'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import LinearGradient from 'react-native-linear-gradient'
 import { useNavigation } from '@react-navigation/native'
@@ -20,7 +19,7 @@ const Profile = () => {
           <View style={styles.userInfoSection}>
             <View style={{ flexDirection: 'row', marginTop: 15, alignItems: 'center', justifyContent: 'space-between' }}>
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <Avatar.Image source={{ uri: "https://cdn-icons-png.flaticon.com/512/2815/2815428.png" }} size={80} style={{ backgroundColor: '#fff' }} />
+                <ImageBackground source={{ uri: `https://cdn-icons-png.flaticon.com/512/2815/2815428.png` }} style={{ backgroundColor: '#fff', height: 80, width: 80, borderRadius: 50 }} />
 
                 <Title style={styles.title}>
                   User
@@ -49,7 +48,7 @@ const Profile = () => {
           <View style={styles.quizBoxWrapper}>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', paddingLeft: 15, paddingRight: 10, paddingTop: 7 }}>
               <Text style={{ color: '#08812f', fontWeight: 'bold', fontSize: 20 }}>QUIZZES</Text>
-              <TouchableRipple onPress={() => { navigation.navigate('Quiz') }} style={{ marginTop: 3 }}>
+              <TouchableRipple onPress={() => { navigation.navigate('Quizzes') }} style={{ marginTop: 3 }}>
                 <View style={{ flexDirection: 'row', }}>
                   <Text style={{ fontWeight: 'bold' }}>See all</Text>
                   <Ionicons name='chevron-forward' size={18} color='#000' />
@@ -61,7 +60,7 @@ const Profile = () => {
 
             <View style={{ flexDirection: 'row', paddingLeft: 15, paddingRight: 15, alignItems: 'center', }}>
 
-              <Image source={quizImage} style={{ width: 100, height: 100 }} />
+              <ImageBackground source={require(`../../assets/quizLogo.png`)} style={{ width: 100, height: 100 }} />
               <Text style={{ color: '#777777', marginLeft: 7, fontWeight: 'bold' }}>Available</Text>
 
             </View>

@@ -7,7 +7,6 @@ export const getNewsFeed = (setIsLoading: Function, category: String = NewsCateg
         setIsLoading(true);
         const res = await apiClient.get('everything?domains=skysports.com&sortBy=publishedAt');
 
-        setIsLoading(false);
 
         if (res.status === 200) {
             dispatch ({
@@ -18,6 +17,9 @@ export const getNewsFeed = (setIsLoading: Function, category: String = NewsCateg
         else {
             console.warn('Something went wrong');
         }
+
+        setIsLoading(false);
+
     }
     catch (error) {
         console.error(error);
@@ -30,7 +32,6 @@ export const searchNews = (searchTerm: string = '', setIsLoading: Function = () 
 
         const res = await apiClient.get('everything?domains=skysports.com&sortBy=publishedAt&q=' + searchTerm);
 
-        setIsLoading(false);
         
         if (res.status === 200) {
             dispatch ({
@@ -41,6 +42,8 @@ export const searchNews = (searchTerm: string = '', setIsLoading: Function = () 
         else {
             console.warn('Something went wrong');
         }
+        setIsLoading(false);
+
     }
     catch (error) {
         console.error(error);

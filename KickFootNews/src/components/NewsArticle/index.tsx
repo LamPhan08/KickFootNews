@@ -1,7 +1,7 @@
 import {useNavigation} from '@react-navigation/native';
 import moment from 'moment';
 import React, {useCallback} from 'react';
-import {Image, Text, TouchableOpacity} from 'react-native';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {SharedElement} from 'react-navigation-shared-element';
 import styles from './styles';
@@ -28,20 +28,17 @@ export const NewsArticle: React.FC<{
       activeOpacity={1}
       style={styles.container}
       onPress={handleNavigate}>
-      <SharedElement
-        style={styles.imageContainer}
-        id={`article#${index}-Image`}>
+      <View
+        style={styles.imageContainer}>
         <Image
           source={{
             uri:
-              post?.urlToImage ??
-              `https://picsum.photos/${Math.floor(Math.random() * 1000)}`,
-            cache: 'force-cache',
+              post?.urlToImage
           }}
           resizeMode={'cover'}
           style={styles.image}
         />
-      </SharedElement>
+      </View>
       <LinearGradient
         colors={['#000A', '#000A', '#000']}
         style={styles.titleContainer}>
