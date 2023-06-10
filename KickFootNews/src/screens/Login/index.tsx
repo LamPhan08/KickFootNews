@@ -6,7 +6,8 @@ import * as yup from 'yup'
 import { useNavigation } from '@react-navigation/native';
 import { scale } from 'react-native-size-matters';
 import Icon from 'react-native-vector-icons/Ionicons'
-
+import auth from '@react-native-firebase/auth';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
 
 const signInValidationSchema = yup.object().shape({
@@ -20,6 +21,62 @@ const Login = () => {
   const navigation: any = useNavigation();
   const [showPassword, setShowPassword] = useState(true);
   // const [showSpinner, setShowSpinner] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const onLogin = () => {
+    console.log('Login');
+    auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(() => {
+        console.log('User logged in!');
+        navigation.navigate('Home')
+      })
+      .catch(error => {
+        if (error.code === 'auth/email-already-in-use') {
+          console.log('That email address is already in use!');
+        }
+
+        if (error.code === 'auth/invalid-email') {
+          console.log('That email address is invalid!');
+        }
+
+        console.error(error);
+      });
+  };
+
+  GoogleSignin.configure({
+    webClientId: '269627309539-2vpmu1dbes2cno06idlcfkpi8boulbkt.apps.googleusercontent.com',
+  });
+
+  const onGoogleButtonPress = () => {
+    // (this function isn't finished yet)
+    // // Check if your device supports Google Play
+    // GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
+    // // Get the users ID token
+    // const { idToken } = GoogleSignin.signIn();
+
+    // // Create a Google credential with the token
+    // const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+
+    // // Sign-in the user with the credential
+    // auth().signInWithCredential(googleCredential)
+    // .then(() => {
+    //     console.log('User logged in!');
+    //     navigation.navigate('Home')
+    //   })
+    //   .catch(error => {
+    //     if (error.code === 'auth/email-already-in-use') {
+    //       console.log('That email address is already in use!');
+    //     }
+
+    //     if (error.code === 'auth/invalid-email') {
+    //       console.log('That email address is invalid!');
+    //     }
+
+    //     console.error(error);
+    //   });
+  }
 
   useEffect(() => {
   }, []);
@@ -65,7 +122,7 @@ const Login = () => {
               console.log(values)
               // setShowSpinner(false);
 
-              navigation.navigate('Home')
+              // navigation.navigate('Home')
 
             }}>
 
@@ -77,7 +134,7 @@ const Login = () => {
                       style={styles.inputEmail}
                       placeholder="Enter Email"
                       keyboardType="email-address"
-                      onChangeText={handleChange('email')}
+                      onChangeText={email => setEmail(email)}
                     />
                     {(errors.email && touched.email) &&
                       <Text style={{ fontSize: 10, color: 'red', marginTop: scale(5) }}> {errors.email}</Text>}
@@ -91,7 +148,7 @@ const Login = () => {
                           placeholder="Enter Password"
                           secureTextEntry={showPassword}
                           style={{ height: scale(50), color: 'black', width: '93%', fontWeight: 'bold' }}
-                          onChangeText={handleChange('password')}
+                          onChangeText={password => setPassword(password)}
                         />
                         {/* </View> */}
 
@@ -123,8 +180,8 @@ const Login = () => {
                 <View style={styles.btnContainer}>
                   <TouchableOpacity
                     onPress={handleSubmit}
-                    style={{ backgroundColor: "#08812f", height: scale(50), borderRadius: scale(10), flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                    <Text style={{ color: '#fff', marginLeft: scale(5), fontWeight: 'bold', fontSize: 16 }}>
+                    style={{ backgroundColor: "#08812f", height: scale(50), borderRadius: scale(10), flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }} onPress={onLogin}>
+                    <Text style={{ color: '#fff', marginLeft: scale(5), fontWeight: 'bold', fontSize: 16 }} >
                       Login
                     </Text>
                     {/* {showSpinner && (<ActivityIndicator color={'#fff'} />)} */}
@@ -157,7 +214,7 @@ const Login = () => {
             </Text>
 
             <View style={{flexDirection: 'row', justifyContent: 'center', marginTop: '5%', gap: 30}}>
-              <TouchableOpacity style={{padding: 10, backgroundColor: '#d8d8d8', borderRadius: 50}}>
+              <TouchableOpacity style={{padding: 10, backgroundColor: '#d8d8d8', borderRadius: 50}} onPress={onGoogleButtonPress}>
                 <Icon name='logo-google' size={30} color = 'black'/>
               </TouchableOpacity>
               <TouchableOpacity style={{padding: 10, backgroundColor: '#d8d8d8', borderRadius: 50}}>

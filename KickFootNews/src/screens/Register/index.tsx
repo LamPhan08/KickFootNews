@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import { scale } from 'react-native-size-matters';
 import Icon from 'react-native-vector-icons/Ionicons'
 import styles from '../Login/styles'
-
+import auth from '@react-native-firebase/auth';
 
 const signInValidationSchema = yup.object().shape({
   email: yup.string()
@@ -19,6 +19,31 @@ const Register = () => {
   const navigation: any = useNavigation();
   const [showPassword, setShowPassword] = useState(true);
   // const [showSpinner, setShowSpinner] = useState(false);
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [rePass, setRePass] = useState('');
+
+  const onRegister = () => {
+    console.log('Register');
+    auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(() => {
+        console.log('User account created & signed in!');
+        navigation.navigate('Login')
+      })
+      .catch(error => {
+        if (error.code === 'auth/email-already-in-use') {
+          console.log('That email address is already in use!');
+        }
+
+        if (error.code === 'auth/invalid-email') {
+          console.log('That email address is invalid!');
+        }
+
+        console.error(error);
+      });
+  }
 
   useEffect(() => {
   }, []);
@@ -65,7 +90,7 @@ const Register = () => {
               console.log(values)
               // setShowSpinner(false);
 
-              navigation.navigate('Home')
+              // navigation.navigate('Home')
 
             }}>
 
@@ -76,7 +101,7 @@ const Register = () => {
                     <TextInput
                       style={styles.inputEmail}
                       placeholder="Enter Name"
-                      onChangeText={handleChange('name')}
+                      onChangeText={username => setUsername(username)}
                     />
 
                     {(errors.name && touched.name) &&
@@ -89,7 +114,7 @@ const Register = () => {
                       style={styles.inputEmail}
                       placeholder="Enter Email"
                       keyboardType="email-address"
-                      onChangeText={handleChange('email')}
+                      onChangeText={email => setEmail(email)}
                     />
                     {(errors.email && touched.email) &&
                       <Text style={{ fontSize: 10, color: 'red', marginTop: scale(5) }}> {errors.email}</Text>}
@@ -103,7 +128,7 @@ const Register = () => {
                           placeholder="Enter Password"
                           secureTextEntry={showPassword}
                           style={{ height: scale(50), color: 'black', width: '93%', fontWeight: 'bold' }}
-                          onChangeText={handleChange('password')}
+                          onChangeText={password => setPassword(password)}
                         />
                         {/* </View> */}
 
@@ -129,7 +154,7 @@ const Register = () => {
                           placeholder="Re-enter Password"
                           secureTextEntry={showPassword}
                           style={{ height: scale(50), color: 'black', width: '93%', fontWeight: 'bold' }}
-                          onChangeText={handleChange('password')}
+                          onChangeText={rePass => setRePass(rePass)}
                         />
                         {/* </View> */}
 
@@ -154,8 +179,8 @@ const Register = () => {
                 <View style={styles.btnContainer}>
                   <TouchableOpacity
                     onPress={handleSubmit}
-                    style={{ backgroundColor: "#08812f", height: scale(50), borderRadius: scale(10), flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                    <Text style={{ color: '#fff', marginLeft: scale(5), fontWeight: 'bold', fontSize: 16 }}>
+                    style={{ backgroundColor: "#08812f", height: scale(50), borderRadius: scale(10), flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }} onPress={onRegister}>
+                    <Text style={{ color: '#fff', marginLeft: scale(5), fontWeight: 'bold', fontSize: 16 }} >
                       Register
                     </Text>
                     {/* {showSpinner && (<ActivityIndicator color={'#fff'} />)} */}

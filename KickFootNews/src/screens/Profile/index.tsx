@@ -9,6 +9,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign'
 import LinearGradient from 'react-native-linear-gradient'
 import { useNavigation } from '@react-navigation/native'
 
+
 const Profile = () => {
   const navigation: any = useNavigation();
 
