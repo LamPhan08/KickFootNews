@@ -8,10 +8,19 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import LinearGradient from 'react-native-linear-gradient'
 import { useNavigation } from '@react-navigation/native'
-
+import auth from '@react-native-firebase/auth';
 
 const Profile = () => {
   const navigation: any = useNavigation();
+
+  const onLogout = () => {
+    auth()
+    .signOut()
+    .then(() => {
+      console.log('User signed out!');
+      navigation.navigate('Login');
+    });
+  }
 
   return (
     <>
@@ -101,7 +110,7 @@ const Profile = () => {
 
             <View style={{ marginHorizontal: 15, borderBottomColor: '#dddddd', borderBottomWidth: 1 }}></View>
 
-            <TouchableRipple onPress={() => { navigation.navigate('Login') }}>
+            <TouchableRipple onPress={onLogout}>
               <View style={styles.menuInsideWrap}>
                 <View style={styles.menuItem}>
                   <Icon name="logout" color="#000" size={25} />

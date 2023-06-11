@@ -29,7 +29,7 @@ const Login = () => {
     auth()
       .signInWithEmailAndPassword(email, password)
       .then(() => {
-        console.log('User logged in!');
+        console.log('User logged in! (Email & Password)');
         navigation.navigate('Home')
       })
       .catch(error => {
@@ -46,36 +46,50 @@ const Login = () => {
   };
 
   GoogleSignin.configure({
-    webClientId: '269627309539-2vpmu1dbes2cno06idlcfkpi8boulbkt.apps.googleusercontent.com',
+    webClientId: '269627309539-55jdltj2n4tt6res0826ce8vrjpckmss.apps.googleusercontent.com',
   });
 
-  const onGoogleButtonPress = () => {
-    // (this function isn't finished yet)
-    // // Check if your device supports Google Play
-    // GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
-    // // Get the users ID token
-    // const { idToken } = GoogleSignin.signIn();
+  // // const onGoogleButtonPress = async () => {
+  // const onGoogleButtonPress = () => {
+  //   // // (this function isn't finished yet)
+  //   // Check if your device supports Google Play
+  //   // await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
+  //   // // Get the users ID token
+  //   // const { idToken } = GoogleSignin.signIn();
 
-    // // Create a Google credential with the token
-    // const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+  //   // // Create a Google credential with the token
+  //   // const googleCredential = await auth.GoogleAuthProvider.credential(idToken);
 
-    // // Sign-in the user with the credential
-    // auth().signInWithCredential(googleCredential)
-    // .then(() => {
-    //     console.log('User logged in!');
-    //     navigation.navigate('Home')
-    //   })
-    //   .catch(error => {
-    //     if (error.code === 'auth/email-already-in-use') {
-    //       console.log('That email address is already in use!');
-    //     }
+  //   // // Sign-in the user with the credential
+  //   // auth().signInWithCredential(googleCredential)
+  //   // .then(() => {
+  //   //     console.log('User logged in!');
+  //   //     navigation.navigate('Home')
+  //   //   })
+  //   //   .catch(error => {
+  //   //     if (error.code === 'auth/email-already-in-use') {
+  //   //       console.log('That email address is already in use!');
+  //   //     }
 
-    //     if (error.code === 'auth/invalid-email') {
-    //       console.log('That email address is invalid!');
-    //     }
+  //   //     if (error.code === 'auth/invalid-email') {
+  //   //       console.log('That email address is invalid!');
+  //   //     }
 
-    //     console.error(error);
-    //   });
+  //   //     console.error(error);
+  //   //   });
+  // }
+
+  async function onGoogleButtonPress() {
+    // Check if your device supports Google Play
+    await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
+    // Get the users ID token
+    const { idToken } = await GoogleSignin.signIn();
+
+    // Create a Google credential with the token
+    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+
+    // Sign-in the user with the credential
+    return auth().signInWithCredential(googleCredential);
   }
 
   useEffect(() => {
@@ -214,7 +228,15 @@ const Login = () => {
             </Text>
 
             <View style={{flexDirection: 'row', justifyContent: 'center', marginTop: '5%', gap: 30}}>
-              <TouchableOpacity style={{padding: 10, backgroundColor: '#d8d8d8', borderRadius: 50}} onPress={onGoogleButtonPress}>
+              <TouchableOpacity style={{padding: 10, backgroundColor: '#d8d8d8', borderRadius: 50}} 
+                onPress={ () => onGoogleButtonPress()
+                  .then(() => 
+                    {
+                      console.log('Signed in with Google!');
+                      navigation.navigate('Home');
+                    }
+                  )
+                }>
                 <Icon name='logo-google' size={30} color = 'black'/>
               </TouchableOpacity>
               <TouchableOpacity style={{padding: 10, backgroundColor: '#d8d8d8', borderRadius: 50}}>

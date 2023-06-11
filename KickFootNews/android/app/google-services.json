@@ -14,15 +14,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "269627309539-2vjqfabepkimg44tnjes0o8mvtvslprv.apps.googleusercontent.com",
+          "client_id": "269627309539-gl55asdoo9htatidi7nmqaeb8edea369.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.footballapp",
-            "certificate_hash": "e7f0c6ed516f461d11e22ee474152b15d1fc726c"
+            "certificate_hash": "cd6f835c24f2f300e9365a597770ecf8daad8a48"
           }
         },
         {
-          "client_id": "269627309539-2vpmu1dbes2cno06idlcfkpi8boulbkt.apps.googleusercontent.com",
+          "client_id": "269627309539-55jdltj2n4tt6res0826ce8vrjpckmss.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
