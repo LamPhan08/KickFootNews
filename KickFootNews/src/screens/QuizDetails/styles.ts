@@ -50,7 +50,7 @@ export default StyleSheet.create({
 
     image: {
         width: '100%',
-        height: 250,
+        height: 220,
         borderRadius: 10,
         marginBottom: 20,
 
@@ -74,7 +74,6 @@ export default StyleSheet.create({
     nextBtn: {
         backgroundColor: '#08812f',
         paddingVertical: 20,
-        marginTop: 20,
         alignItems: 'center',
         borderRadius: 12
     },

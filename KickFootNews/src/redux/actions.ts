@@ -62,25 +62,25 @@ export const RESET_SEARCH_RESULTS = 'RESET_SEARCH_RESULTS';
 export const MATCH = 'MATCH';
 
 
-export const getPremierMatch = (fixtureDate: String = '') => async (dispatch: Function, ) => {
+export const getMatches = (fixtureDate: string = '', setIsLoading: Function = () => {}) => async (dispatch: Function) => {
     try {
-        const res = await matchApi.get('fixtures', {params: {
-            date: '2022-05-28',
-            league: '39',
-            season: '2022'
-        }});
+        setIsLoading(true);
 
-      if (res.status === 200) {
+        const res = await matchApi.get('fixtures', {params: {
+            timezone: 'Asia/Ho_Chi_Minh',
+            date: fixtureDate,
+        },});
+
         dispatch({
           type: MATCH,
-          payload: res.data.response
+          payload: res?.data?.response
         });
 
-        console.log(res.data)
-      } else {
-        console.warn('Something went wrong');
-      }
+        // console.log(res.data.errors)
+        setIsLoading(false);
+
+      
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
   };

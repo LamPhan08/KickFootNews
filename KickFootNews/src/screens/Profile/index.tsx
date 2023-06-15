@@ -18,7 +18,7 @@ const Profile = () => {
     .signOut()
     .then(() => {
       console.log('User signed out!');
-      navigation.navigate('Login');
+      navigation.replace('Login');
     });
   }
 

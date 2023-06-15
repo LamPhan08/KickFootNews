@@ -3,6 +3,7 @@ import React, {useState, useEffect} from 'react'
 import { View, Image } from 'react-native';
 import styles from './styles';
 import logo from '../../assets/logoFootball.png'
+import auth from '@react-native-firebase/auth';
 
 const Splash = () => {
     const [isVisible, setIsVisible] = useState(true);
@@ -15,7 +16,14 @@ const Splash = () => {
     useEffect(() => {
         setTimeout(() => {
             hideSplashScreen();
-            navigation.navigate("Login");
+            auth().onAuthStateChanged(function(user) {
+                if (user) {
+                    navigation.replace("Home");
+                }
+                else {
+                    navigation.replace("Login");
+                }
+            })
         }, 1500);
     }, []);
 

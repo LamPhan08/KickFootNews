@@ -32,7 +32,7 @@ export const Feed: React.FC = () => {
     // console.log(newsFeed)
 
     return (
-        <SafeAreaView style={[styles.container, {backgroundColor}]}>
+        <SafeAreaView style={[styles.container, {backgroundColor}]} >
             {/* <SearchInput
                 searchText={searchText}
                 setSearchText={setSearchText}
@@ -49,7 +49,8 @@ export const Feed: React.FC = () => {
 
             <FlatList 
                 refreshControl={<RefreshControl refreshing={isLoading} onRefresh={handleRefresh}/>}
-                showsHorizontalScrollIndicator={false}
+                showsVerticalScrollIndicator={false}
+                initialNumToRender={10}
                 data={newsFeed}
                 renderItem={({ item, index }) => {
                     return (<NewsArticle post={item} index={index} />)

@@ -34,7 +34,7 @@ export const SearchInput: React.FC <{
             onChangeText={(text: string) => {
                 setSearchText(text);
                 searchForText(text);
-            }}
+            }}  
             maxLength={40}
             returnKeyType={'search'}
         />

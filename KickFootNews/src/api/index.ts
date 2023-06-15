@@ -15,9 +15,8 @@ export const apiClient = axios.create({
 
 export const matchApi = axios.create({
     baseURL: 'https://v3.football.api-sports.io/',
-    // params: {date: '2021-01-29'},
     headers: {
-      'X-RapidAPI-Key': '0e97f76fedmsh0633126664172a6p19a263jsn4e8543b8eeb8',
+      'X-RapidAPI-Key': 'be8e64dbb19c2307cab1d4d00d62dccb',
       'X-RapidAPI-Host': 'v3.football.api-sports.io'
     }
 })

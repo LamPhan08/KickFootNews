@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, ScrollView, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native'
+import { View, Text, ScrollView, TextInput, TouchableOpacity, ToastAndroid, ActivityIndicator } from 'react-native'
 import styles from './styles'
 import { Formik } from 'formik'
 import * as yup from 'yup'
@@ -20,29 +20,39 @@ const signInValidationSchema = yup.object().shape({
 const Login = () => {
   const navigation: any = useNavigation();
   const [showPassword, setShowPassword] = useState(true);
-  // const [showSpinner, setShowSpinner] = useState(false);
+  const [showSpinner, setShowSpinner] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const onLogin = () => {
-    console.log('Login');
-    auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(() => {
-        console.log('User logged in! (Email & Password)');
-        navigation.navigate('Home')
-      })
-      .catch(error => {
-        if (error.code === 'auth/email-already-in-use') {
-          console.log('That email address is already in use!');
-        }
+    if (email === '' || password === '') {
+      ToastAndroid.show("Please input full information!", ToastAndroid.SHORT)
+    }
+    else {
+      setShowSpinner(true)
+      
+      auth()
+        .signInWithEmailAndPassword(email, password)
+        .then(() => {
+          console.log('User logged in! (Email & Password)');
+          navigation.replace('Home')
+          setShowSpinner(false)
+        })
+        .catch(error => {
+          if (error.code === 'auth/email-already-in-use') {
+            ToastAndroid.show("The email address is already in use!", ToastAndroid.SHORT)
+          }
 
-        if (error.code === 'auth/invalid-email') {
-          console.log('That email address is invalid!');
-        }
+          if (error.code === 'auth/invalid-email') {
+            ToastAndroid.show("The email address is badly formatted!", ToastAndroid.SHORT)
+          }
+          else {
+            ToastAndroid.show("Invalid email or password!", ToastAndroid.SHORT)
+          }
+          setShowSpinner(false)
 
-        console.error(error);
-      });
+        });
+    }
   };
 
   GoogleSignin.configure({
@@ -173,12 +183,12 @@ const Login = () => {
                           <Icon name={showPassword ? 'key-outline' : 'key'} size={20} color='black' />
                         </TouchableOpacity>
                       </View>
-                      
+
 
 
                     </View>
                     {(errors.password && touched.password) &&
-                          <Text style={{ fontSize: 10, color: 'red', marginTop: scale(5) }}> {errors.password}</Text>}
+                      <Text style={{ fontSize: 10, color: 'red', marginTop: scale(5) }}> {errors.password}</Text>}
                   </View>
 
                   <View style={styles.forgotPasswordContainer}>
@@ -193,12 +203,11 @@ const Login = () => {
 
                 <View style={styles.btnContainer}>
                   <TouchableOpacity
-                    onPress={handleSubmit}
                     style={{ backgroundColor: "#08812f", height: scale(50), borderRadius: scale(10), flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }} onPress={onLogin}>
                     <Text style={{ color: '#fff', marginLeft: scale(5), fontWeight: 'bold', fontSize: 16 }} >
                       Login
                     </Text>
-                    {/* {showSpinner && (<ActivityIndicator color={'#fff'} />)} */}
+                    {showSpinner && (<ActivityIndicator color={'#fff'} style={{marginLeft: 3}}/>)}
                   </TouchableOpacity>
 
                 </View>
@@ -213,7 +222,7 @@ const Login = () => {
         <View style={styles.footerContainer}>
 
           <View style={styles.footerContainerInner}>
-            <Text style={{fontWeight: 'bold'}}>
+            <Text style={{ fontWeight: 'bold' }}>
               Don't have an account?
             </Text>
 
@@ -223,28 +232,27 @@ const Login = () => {
           </View>
 
           <View style={styles.otherLogin}>
-            <Text style={{color: "#08812f", fontWeight:"bold", fontSize: 15}}>
+            <Text style={{ color: "#08812f", fontWeight: "bold", fontSize: 15 }}>
               Or continue with
             </Text>
 
-            <View style={{flexDirection: 'row', justifyContent: 'center', marginTop: '5%', gap: 30}}>
-              <TouchableOpacity style={{padding: 10, backgroundColor: '#d8d8d8', borderRadius: 50}} 
-                onPress={ () => onGoogleButtonPress()
-                  .then(() => 
-                    {
-                      console.log('Signed in with Google!');
-                      navigation.navigate('Home');
-                    }
+            <View style={{ flexDirection: 'row', justifyContent: 'center', marginTop: '5%', gap: 30 }}>
+              <TouchableOpacity style={{ padding: 10, backgroundColor: '#d8d8d8', borderRadius: 50 }}
+                onPress={() => onGoogleButtonPress()
+                  .then(() => {
+                    console.log('Signed in with Google!');
+                    navigation.navigate('Home');
+                  }
                   )
                 }>
-                <Icon name='logo-google' size={30} color = 'black'/>
+                <Icon name='logo-google' size={30} color='black' />
               </TouchableOpacity>
-              <TouchableOpacity style={{padding: 10, backgroundColor: '#d8d8d8', borderRadius: 50}}>
-                <Icon name='logo-facebook' size={30} color = 'black'/>
+              <TouchableOpacity style={{ padding: 10, backgroundColor: '#d8d8d8', borderRadius: 50 }}>
+                <Icon name='logo-facebook' size={30} color='black' />
               </TouchableOpacity>
             </View>
-        </View>
-        
+          </View>
+
 
         </View>
       </ScrollView>

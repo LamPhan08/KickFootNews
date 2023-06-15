@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, ScrollView, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native'
+import { View, Text, ScrollView, TextInput, TouchableOpacity, ActivityIndicator, ToastAndroid } from 'react-native'
 import { Formik } from 'formik'
 import * as yup from 'yup'
 import { useNavigation } from '@react-navigation/native';
@@ -18,35 +18,46 @@ const signInValidationSchema = yup.object().shape({
 const Register = () => {
   const navigation: any = useNavigation();
   const [showPassword, setShowPassword] = useState(true);
-  // const [showSpinner, setShowSpinner] = useState(false);
+  const [showSpinner, setShowSpinner] = useState(false);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rePass, setRePass] = useState('');
+  const [showNotice, setShowNotice] = useState(false)
 
   const onRegister = () => {
-    console.log('Register');
-    auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then(() => {
-        console.log('User account created & signed in!');
-        navigation.navigate('Login')
-      })
-      .catch(error => {
-        if (error.code === 'auth/email-already-in-use') {
-          console.log('That email address is already in use!');
-        }
+    if (username === '' || email === '' || password === '' || rePass === '') {
+      ToastAndroid.show("Please input full information!", ToastAndroid.SHORT)
+    }
+    else {
+      if (rePass !== password) {
+        setShowNotice(true)
+      }
+      else {
+        setShowSpinner(true)
+        setShowNotice(false)
 
-        if (error.code === 'auth/invalid-email') {
-          console.log('That email address is invalid!');
-        }
+        auth()
+          .createUserWithEmailAndPassword(email, password)
+          .then(() => {
+            ToastAndroid.show("Your account has been successfully created!", ToastAndroid.SHORT)
+            navigation.navigate('Login')
+            setShowSpinner(false)
+          })
+          .catch(error => {
+            if (error.code === 'auth/email-already-in-use') {
+              ToastAndroid.show("The email address is already in use!", ToastAndroid.SHORT)
+            }
 
-        console.error(error);
-      });
+            if (error.code === 'auth/invalid-email') {
+              ToastAndroid.show("The email address is badly formatted!", ToastAndroid.SHORT)
+            }
+            setShowSpinner(false)
+          });
+      }
+
+    }
   }
-
-  useEffect(() => {
-  }, []);
 
   return (
     <View style={styles.loginMain}>
@@ -151,10 +162,12 @@ const Register = () => {
                       <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                         {/* <View> */}
                         <TextInput
-                          placeholder="Re-enter Password"
+                          placeholder="Confirm Password"
                           secureTextEntry={showPassword}
                           style={{ height: scale(50), color: 'black', width: '93%', fontWeight: 'bold' }}
-                          onChangeText={rePass => setRePass(rePass)}
+                          onChangeText={(repass) => {
+                            setRePass(repass)
+                          }}
                         />
                         {/* </View> */}
 
@@ -175,15 +188,16 @@ const Register = () => {
 
                 </View>
 
+                {showNotice && <Text style={{ marginLeft: 3, fontSize: 12, color: 'red' }}>Please make sure your passwords match</Text>}
+
 
                 <View style={styles.btnContainer}>
                   <TouchableOpacity
-                    onPress={handleSubmit}
                     style={{ backgroundColor: "#08812f", height: scale(50), borderRadius: scale(10), flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }} onPress={onRegister}>
                     <Text style={{ color: '#fff', marginLeft: scale(5), fontWeight: 'bold', fontSize: 16 }} >
                       Register
                     </Text>
-                    {/* {showSpinner && (<ActivityIndicator color={'#fff'} />)} */}
+                    {showSpinner && (<ActivityIndicator color={'#fff'} style={{marginLeft: 3}}/>)}
                   </TouchableOpacity>
 
                 </View>
@@ -197,7 +211,7 @@ const Register = () => {
 
         <View style={styles.footerContainer}>
           <View style={styles.footerContainerInner}>
-            <Text style={{fontWeight: 'bold'}}>
+            <Text style={{ fontWeight: 'bold' }}>
               Already have an account?
             </Text>
 
