@@ -1,4 +1,4 @@
-import React from 'react'
+import React ,{ useState,useEffect} from 'react'
 import { ImageBackground, SafeAreaView, View, ScrollView } from 'react-native'
 import styles from './styles'
 import { Avatar, Title, Caption, Text, TouchableRipple } from 'react-native-paper'
@@ -9,7 +9,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign'
 import LinearGradient from 'react-native-linear-gradient'
 import { useNavigation } from '@react-navigation/native'
 import auth from '@react-native-firebase/auth';
-
+import firestore, { FirebaseFirestoreTypes } from '@react-native-firebase/firestore';
 const Profile = () => {
   const navigation: any = useNavigation();
 
@@ -21,7 +21,23 @@ const Profile = () => {
       navigation.replace('Login');
     });
   }
-
+  const [userData, setUserData] = useState({ phone: '', name: '',avatar: ''});
+  const [image, setImage] = useState(''); 
+  const getUser = async() => {
+   const currentUser = await firestore()
+   .collection('users')
+   .doc(auth().currentUser?.uid)
+   .get()
+   .then((documentSnapshot) => {
+     if( documentSnapshot.exists ) {
+       console.log('User Data', documentSnapshot.data());
+       setUserData(documentSnapshot.data() as React.SetStateAction<{ phone: string; name: string; avatar: string }>);
+     }
+   })
+ }
+ useEffect(() => {
+  getUser();
+}, []);
   return (
     <>
       <SafeAreaView style={styles.container}>
@@ -29,7 +45,12 @@ const Profile = () => {
           <View style={styles.userInfoSection}>
             <View style={{ flexDirection: 'row', marginTop: 15, alignItems: 'center', justifyContent: 'space-between' }}>
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <ImageBackground source={{ uri: `https://cdn-icons-png.flaticon.com/512/2815/2815428.png` }} style={{ backgroundColor: '#fff', height: 80, width: 80, borderRadius: 50 }} />
+                <ImageBackground source={{  uri: image
+                            ? image
+                            : userData
+                            ? userData.avatar ||
+                            "https://cdn-icons-png.flaticon.com/512/2815/2815428.png"
+                            :"https://cdn-icons-png.flaticon.com/512/2815/2815428.png",}} style={{ backgroundColor: '#fff', height: 80, width: 80, borderRadius: 50 }} />
 
                 <Title style={styles.title}>
                   User
@@ -45,11 +66,11 @@ const Profile = () => {
           <View style={styles.userInfoSection}>
             <View style={styles.row}>
               <Icon name="phone" color="#fff" size={20} />
-              <Text style={{ color: "#fff", marginLeft: 20 }}>0123456789</Text>
+              <Text style={{ color: "#fff", marginLeft: 20 }}>{userData ? userData.phone : ''}</Text>
             </View>
             <View style={styles.row}>
               <Icon name="email" color="#fff" size={20} />
-              <Text style={{ color: "#fff", marginLeft: 20 }}>user@gmail.com</Text>
+              <Text style={{ color: "#fff", marginLeft: 20 }}>{userData ? userData.name : ''}</Text>
             </View>
           </View>
         </LinearGradient>
