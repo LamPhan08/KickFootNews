@@ -1,9 +1,9 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 
 export default StyleSheet.create({
     line: {
         borderColor: '#ddd',
-        borderWidth: 0.5
+        borderWidth: 0.5,
     },
 
     logo: {
@@ -30,31 +30,36 @@ export default StyleSheet.create({
         marginLeft: 15,
         color: '#000',
         flexWrap: 'wrap',
-        
+        // backgroundColor: 'red',
+        width: Dimensions.get('window').width/2.7
     },
 
     matchGoalsAndStatus: {
         flexDirection: 'row',
         alignItems: 'center',
-        paddingRight: 15
     },
 
     matchGoals: {
         gap: 25,
-        marginRight: 15
+        marginRight: 10
     },
 
     goal: {
-        fontSize: 16,
+        fontSize: 13,
         fontWeight: '600',
         color: '#000'
     },
 
     matchStatus: {
-        paddingLeft: 30,
+        textAlign: 'center',
+        // backgroundColor: 'red'
     },
 
     status: {
-        fontWeight: '600'
+        fontWeight: '600',
+        fontSize: 12,
+        width:100,
+        textAlign: 'center',
+        marginHorizontal: 5
     }
 })

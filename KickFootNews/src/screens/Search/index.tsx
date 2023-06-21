@@ -24,6 +24,7 @@ const Search = () => {
       />
 
       <FlatList
+        refreshControl={<RefreshControl refreshing={isLoading}/>}
         showsVerticalScrollIndicator={false}
         data={searchText?.trim() ? searchResults : null}
         renderItem={({ item, index }: any) => (

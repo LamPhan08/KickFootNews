@@ -15,8 +15,8 @@ export default StyleSheet.create({
     matchContainer: {
         backgroundColor: '#fff',
         elevation: 3,
-        paddingHorizontal: 15,
-        marginBottom: 15
+        paddingLeft: 15,
+        marginBottom: 15,
     },
 
     leagueIn4: {
@@ -48,15 +48,21 @@ export default StyleSheet.create({
     },
 
     noMatches: {
-        marginTop: Dimensions.get('window').height/3,
+        marginTop: Dimensions.get('window').height/5,
         justifyContent: 'center',
         alignItems: 'center',
     },
 
     noMatchesNotification: {
         color: '#000',
-        fontSize: 18,
-        fontWeight: '600'
+        fontSize: 16,
+        // fontWeight: '600',
+        marginTop: 30
+    },
+
+    footballPlayer: {
+        width: 200,
+        height: 200
     }
 
 })

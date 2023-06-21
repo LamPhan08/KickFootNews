@@ -11,6 +11,7 @@ import TopTabNavigator from './toptabnavigator';
 import { Text } from 'react-native';
 import Matches from '../screens/Matches';
 
+
 const Tabs = () => {
     const Tab = createBottomTabNavigator();
 
@@ -19,6 +20,12 @@ const Tabs = () => {
         tabBarActiveTintColor: "#08812f",
         // headerShown: false,
         tabBarShowLabel: false,
+        tabBarStyle: {
+            borderTopLeftRadius: 15,
+            borderTopRightRadius: 15,
+            backgroundColor: '#fff',
+            height: 65,
+        }
     }} initialRouteName='Feed'>
         <Tab.Screen name='Feed' component={Feed} options={{
             tabBarIcon: ({focused}) => <Iconicons name='home-sharp' size={22} color={focused ? "#08812f" : "gray"}/>,

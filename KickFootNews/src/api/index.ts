@@ -20,3 +20,4 @@ export const matchApi = axios.create({
       'X-RapidAPI-Host': 'v3.football.api-sports.io'
     }
 })
+

@@ -1,28 +1,28 @@
 import React from 'react'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
-import { View, Text } from 'react-native'
-import UEFA from '../screens/UEFA'
-import PremierLeague from '../screens/Matches'
+import { View, Text, Dimensions } from 'react-native'
+import MatchOverview from '../screens/MatchOverview';
+import MatchLineup from '../screens/MatchLineup';
 
 const Tab = createMaterialTopTabNavigator();
 
-const TopTabNavigator = () => {
+const TopTabNavigator = ({fixture}: any) => {
+    // console.log(event);
     return (
-        <Tab.Navigator initialRouteName='Premier League'
+        <Tab.Navigator initialRouteName='MatchOverview'
                 screenOptions={{
-                    tabBarLabelStyle: { fontWeight: 'bold', padding: 5, },
+                    tabBarLabelStyle: { fontWeight: 'bold'},
                     tabBarGap: 5,
-                    tabBarIndicatorStyle: {backgroundColor: '#65a844'},
+                    tabBarIndicatorStyle: {backgroundColor: '#65a844', width: 90, left: (Dimensions.get('window').width/2 - 90)/2},
                     tabBarInactiveTintColor: 'gray',
-                    tabBarActiveTintColor: '#65a844'
-                    
+                    tabBarActiveTintColor: '#000',
+                    tabBarStyle:{width: Dimensions.get('window').width, alignSelf: 'center', borderBottomLeftRadius: 10, borderBottomRightRadius: 10},
+                    tabBarIndicatorContainerStyle: {justifyContent: 'center'},
                 }}
                 
-                >
-                <Tab.Screen name='Premier League' component={PremierLeague} options={{
-                    
-                }}/>
-                <Tab.Screen name='UEFA' component={UEFA} />
+                >   
+                <Tab.Screen name='Overview' component={MatchOverview} initialParams={fixture}/>
+                <Tab.Screen name='Line-up' component={MatchLineup} initialParams={fixture}/>
             </Tab.Navigator>
         
     )

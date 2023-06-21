@@ -1,4 +1,4 @@
-import React ,{ useState,useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { ImageBackground, SafeAreaView, View, ScrollView } from 'react-native'
 import styles from './styles'
 import { Avatar, Title, Caption, Text, TouchableRipple } from 'react-native-paper'
@@ -15,29 +15,29 @@ const Profile = () => {
 
   const onLogout = () => {
     auth()
-    .signOut()
-    .then(() => {
-      console.log('User signed out!');
-      navigation.replace('Login');
-    });
+      .signOut()
+      .then(() => {
+        console.log('User signed out!');
+        navigation.replace('Login');
+      });
   }
-  const [userData, setUserData] = useState({ phone: '', name: '',avatar: ''});
-  const [image, setImage] = useState(''); 
-  const getUser = async() => {
-   const currentUser = await firestore()
-   .collection('users')
-   .doc(auth().currentUser?.uid)
-   .get()
-   .then((documentSnapshot) => {
-     if( documentSnapshot.exists ) {
-       console.log('User Data', documentSnapshot.data());
-       setUserData(documentSnapshot.data() as React.SetStateAction<{ phone: string; name: string; avatar: string }>);
-     }
-   })
- }
- useEffect(() => {
-  getUser();
-}, []);
+  const [userData, setUserData] = useState({ phone: '', name: '', avatar: '' });
+  const [image, setImage] = useState('');
+  const getUser = async () => {
+    const currentUser = await firestore()
+      .collection('users')
+      .doc(auth().currentUser?.uid)
+      .get()
+      .then((documentSnapshot) => {
+        if (documentSnapshot.exists) {
+          console.log('User Data', documentSnapshot.data());
+          setUserData(documentSnapshot.data() as React.SetStateAction<{ phone: string; name: string; avatar: string }>);
+        }
+      })
+  }
+  useEffect(() => {
+    getUser();
+  }, []);
   return (
     <>
       <SafeAreaView style={styles.container}>
@@ -45,12 +45,14 @@ const Profile = () => {
           <View style={styles.userInfoSection}>
             <View style={{ flexDirection: 'row', marginTop: 15, alignItems: 'center', justifyContent: 'space-between' }}>
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <ImageBackground source={{  uri: image
-                            ? image
-                            : userData
-                            ? userData.avatar ||
-                            "https://cdn-icons-png.flaticon.com/512/2815/2815428.png"
-                            :"https://cdn-icons-png.flaticon.com/512/2815/2815428.png",}} style={{ backgroundColor: '#fff', height: 80, width: 80, borderRadius: 50 }} />
+                <ImageBackground source={{
+                  uri: image
+                    ? image
+                    : userData
+                      ? userData.avatar ||
+                      "https://cdn-icons-png.flaticon.com/512/2815/2815428.png"
+                      : "https://cdn-icons-png.flaticon.com/512/2815/2815428.png",
+                }} style={{ backgroundColor: '#fff', height: 80, width: 80, borderRadius: 50 }} />
 
                 <Title style={styles.title}>
                   User
@@ -58,12 +60,12 @@ const Profile = () => {
               </View>
 
               <TouchableRipple onPress={() => { navigation.navigate('EditProfile') }}>
-                <AntDesign name='edit' size={22} color='#fff'/>
+                <AntDesign name='edit' size={22} color='#fff' />
               </TouchableRipple>
             </View>
           </View>
 
-          <View style={styles.userInfoSection}>
+          {userData ? <View style={styles.userInfoSection}>
             <View style={styles.row}>
               <Icon name="phone" color="#fff" size={20} />
               <Text style={{ color: "#fff", marginLeft: 20 }}>{userData ? userData.phone : ''}</Text>
@@ -72,7 +74,7 @@ const Profile = () => {
               <Icon name="email" color="#fff" size={20} />
               <Text style={{ color: "#fff", marginLeft: 20 }}>{userData ? userData.name : ''}</Text>
             </View>
-          </View>
+          </View> : null}
         </LinearGradient>
 
         <ScrollView>

@@ -19,7 +19,7 @@ export const RootNavigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Home">
+        initialRouteName="Splash">
         <Stack.Screen name="Home" component={Tabs} options={{headerShown: false, title: ''}}/>
         <Stack.Screen
           name="NewsDetails"
@@ -41,7 +41,9 @@ export const RootNavigation = () => {
         <Stack.Screen name="Register" component={Register} options={{headerShown: false}}/>
         <Stack.Screen name="Bookmarks" component={Bookmark} options={{headerTitleAlign: 'center'}}/>
         <Stack.Screen name="Quizzes" component={Quizzes} options={{headerTitleAlign: 'center'}}/>
-        <Stack.Screen name="MatchDetails" component={MatchDetails} options={{title: ''}}/>
+        <Stack.Screen name="MatchDetails" component={MatchDetails} options={{
+          title: 'Match Details', 
+          headerTitleAlign:'center'}}/>
         <Stack.Screen name="About" component={About} options={{headerTitleAlign: 'center', title:'About Us'}}/>
         <Stack.Screen name="EditProfile" component={EditProfile} options={{
           title: 'Edit Profile',

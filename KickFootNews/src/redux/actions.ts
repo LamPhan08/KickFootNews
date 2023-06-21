@@ -67,7 +67,7 @@ export const getMatches = (fixtureDate: string = '', setIsLoading: Function = ()
         setIsLoading(true);
 
         const res = await matchApi.get('fixtures', {params: {
-            timezone: 'Asia/Ho_Chi_Minh',
+            timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
             date: fixtureDate,
         },});
 
@@ -84,3 +84,49 @@ export const getMatches = (fixtureDate: string = '', setIsLoading: Function = ()
       console.error(error)
     }
   };
+
+export const EVENT = 'EVENT';
+
+
+export const getEvents = (fixtureId: number) => async (dispatch: Function) => {
+    try {
+
+        const res = await matchApi.get('fixtures/events', {params: {
+            fixture: fixtureId
+        },});
+
+        dispatch({
+          type: EVENT,
+          payload: res?.data?.response
+        });
+
+        // console.log(res.data.errors)
+
+      
+    } catch (error) {
+      console.error(error)
+    }
+};
+
+export const LINEUPS = 'LINEUPS';
+
+
+export const getLineups = (fixtureId: number) => async (dispatch: Function) => {
+    try {
+
+        const res = await matchApi.get('fixtures/lineups', {params: {
+            fixture: fixtureId
+        },});
+
+        dispatch({
+          type: LINEUPS,
+          payload: res?.data?.response
+        });
+
+        // console.log(res.data.response)
+
+      
+    } catch (error) {
+      console.error(error)
+    }
+};

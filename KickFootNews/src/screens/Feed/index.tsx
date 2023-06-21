@@ -1,12 +1,9 @@
 import React, { useEffect, useCallback, useState } from 'react';
-import { FlatList, RefreshControl, Text, useColorScheme, ScrollView, SafeAreaView, ToastAndroid } from 'react-native';
-import uuid from 'react-native-uuid';
+import { FlatList, RefreshControl, Text, useColorScheme, SafeAreaView, ToastAndroid, ScrollView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { getNewsFeed } from '../../redux/actions';
 import { NewsArticle } from '../../components/NewsArticle';
-import { NewsCategory } from '../../constants';
 import styles from './styles';
-import axios from 'axios';
 
 
 
@@ -30,6 +27,7 @@ export const Feed: React.FC = () => {
     const backgroundColor = useColorScheme() === 'dark' ? '#000' : '#fff';
 
     // console.log(newsFeed)
+    
 
     return (
         <SafeAreaView style={[styles.container, {backgroundColor}]} >
