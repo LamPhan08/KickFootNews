@@ -67,10 +67,10 @@ const Profile = () => {
               <Icon name="phone" color="#fff" size={20} />
               <Text style={{ color: "#fff", marginLeft: 20 }}>{userData ? userData.phone : ''}</Text>
             </View>
-            <View style={styles.row}>
+            {/* <View style={styles.row}>
               <Icon name="email" color="#fff" size={20} />
               <Text style={{ color: "#fff", marginLeft: 20 }}>{userData ? userData.email : ''}</Text>
-            </View>
+            </View> */}
           </View> : null}
         </LinearGradient>
 

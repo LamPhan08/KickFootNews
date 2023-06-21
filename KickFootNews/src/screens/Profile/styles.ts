@@ -12,7 +12,7 @@ export default StyleSheet.create({
 
     userInfoSection: {
         paddingHorizontal: 15,
-        marginBottom: 25,
+        marginBottom: 20,
     },
 
     title: {
