@@ -8,8 +8,9 @@ import firestore, { FirebaseFirestoreTypes } from '@react-native-firebase/firest
 import { firebase } from '@react-native-firebase/auth';
 import auth from '@react-native-firebase/auth';
 import {MediaType, launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import { useNavigation } from '@react-navigation/native'
 const EditProfile = () => {
- 
+    const navigation: any = useNavigation();
    const [image, setImage] = useState('');
    const [uploading, setUploading] = useState(false);
    const [transferred, setTransferred] = useState(0);
@@ -32,18 +33,21 @@ const EditProfile = () => {
     firestore()
     .collection('users')
     .doc(auth().currentUser?.uid)
-    .set({
+    .update({
       name: userData.name,
       phone: userData.phone,
       avatar: image
     })
     .then(() => {
-        
       console.log('User Updated!');
       Alert.alert(
         'Profile Updated!',
-        'Your profile has been updated successfully.'
+        'Your profile has been updated successfully.',
+        [
+            {text: 'OK!', onPress: () => navigation.navigate('Profile')}
+        ]
       );
+      
     })
   }
   let options = {
@@ -146,22 +150,7 @@ const EditProfile = () => {
                 />
             </View>
 
-            <View style={styles.action}>
-                <FontAwesome name="envelope-o" color='#000' size={20} />
-                <TextInput
-                    placeholder="Email"
-                    placeholderTextColor="#666666"
-                    keyboardType="email-address"
-                    autoCorrect={false}
-                    style={[
-                        styles.textInput,
-                        {
-                            color: '#000'
-                        },
-                    ]}
-                />
-            </View>
-
+            
             <TouchableOpacity style={styles.commandButton} onPress={handleUpdate}>
                 <Text style={styles.panelButtonTitle}>Submit</Text>
             </TouchableOpacity>

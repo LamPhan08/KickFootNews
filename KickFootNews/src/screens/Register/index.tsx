@@ -7,7 +7,7 @@ import { scale } from 'react-native-size-matters';
 import Icon from 'react-native-vector-icons/Ionicons'
 import styles from '../Login/styles'
 import auth from '@react-native-firebase/auth';
-
+import firestore, { FirebaseFirestoreTypes } from '@react-native-firebase/firestore';
 const signInValidationSchema = yup.object().shape({
   email: yup.string()
     .email('Please enter a valid email!')
@@ -41,6 +41,16 @@ const Register = () => {
           .createUserWithEmailAndPassword(email, password)
           .then(() => {
             ToastAndroid.show("Your account has been successfully created!", ToastAndroid.SHORT)
+            firestore()
+              .collection('users')
+              .doc(auth().currentUser?.uid)
+              .set({
+                name: username,
+                email: email 
+              })
+              .then(() => {
+                console.log('User Signed up!');
+              })
             navigation.navigate('Login')
             setShowSpinner(false)
           })
@@ -197,7 +207,7 @@ const Register = () => {
                     <Text style={{ color: '#fff', marginLeft: scale(5), fontWeight: 'bold', fontSize: 16 }} >
                       Register
                     </Text>
-                    {showSpinner && (<ActivityIndicator color={'#fff'} style={{marginLeft: 3}}/>)}
+                    {showSpinner && (<ActivityIndicator color={'#fff'} style={{ marginLeft: 3 }} />)}
                   </TouchableOpacity>
 
                 </View>

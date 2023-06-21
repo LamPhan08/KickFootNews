@@ -12,7 +12,6 @@ import auth from '@react-native-firebase/auth';
 import firestore, { FirebaseFirestoreTypes } from '@react-native-firebase/firestore';
 const Profile = () => {
   const navigation: any = useNavigation();
-
   const onLogout = () => {
     auth()
       .signOut()
@@ -21,19 +20,17 @@ const Profile = () => {
         navigation.replace('Login');
       });
   }
-  const [userData, setUserData] = useState({ phone: '', name: '', avatar: '' });
+  const [userData, setUserData] = useState({ phone: '', name: '', avatar: '' ,email:''});
   const [image, setImage] = useState('');
   const getUser = async () => {
-    const currentUser = await firestore()
+      await firestore()
       .collection('users')
       .doc(auth().currentUser?.uid)
-      .get()
-      .then((documentSnapshot) => {
-        if (documentSnapshot.exists) {
-          console.log('User Data', documentSnapshot.data());
-          setUserData(documentSnapshot.data() as React.SetStateAction<{ phone: string; name: string; avatar: string }>);
-        }
-      })
+      .onSnapshot(documentSnapshot => {
+      console.log('User data: ', documentSnapshot.data());
+      setUserData(documentSnapshot.data() as React.SetStateAction<{ phone: string; name: string; avatar: string;email:string }>);
+      });
+      
   }
   useEffect(() => {
     getUser();
@@ -55,7 +52,7 @@ const Profile = () => {
                 }} style={{ backgroundColor: '#fff', height: 80, width: 80, borderRadius: 50 }} />
 
                 <Title style={styles.title}>
-                  User
+                {userData ? userData.name : ''}
                 </Title>
               </View>
 
@@ -72,7 +69,7 @@ const Profile = () => {
             </View>
             <View style={styles.row}>
               <Icon name="email" color="#fff" size={20} />
-              <Text style={{ color: "#fff", marginLeft: 20 }}>{userData ? userData.name : ''}</Text>
+              <Text style={{ color: "#fff", marginLeft: 20 }}>{userData ? userData.email : ''}</Text>
             </View>
           </View> : null}
         </LinearGradient>

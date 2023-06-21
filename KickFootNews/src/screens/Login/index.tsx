@@ -8,7 +8,7 @@ import { scale } from 'react-native-size-matters';
 import Icon from 'react-native-vector-icons/Ionicons'
 import auth from '@react-native-firebase/auth';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
-
+import firestore, { FirebaseFirestoreTypes } from '@react-native-firebase/firestore';
 
 const signInValidationSchema = yup.object().shape({
   email: yup.string()
@@ -241,6 +241,16 @@ const Login = () => {
                 onPress={() => onGoogleButtonPress()
                   .then(() => {
                     console.log('Signed in with Google!');
+                    firestore()
+                    .collection('users')
+                    .doc(auth().currentUser?.uid)
+                    .set({
+                      name: auth().currentUser?.displayName,
+                      email: auth().currentUser?.email
+                    })
+                    .then(() => {
+                      console.log('User Signed up!');
+                    })
                     navigation.navigate('Home');
                   }
                   )
