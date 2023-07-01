@@ -3,10 +3,10 @@ import { FlatList, RefreshControl, useColorScheme, SafeAreaView } from 'react-na
 import uuid from 'react-native-uuid';
 import { useDispatch, useSelector } from 'react-redux';
 import { getNewsFeed } from '../../redux/actions';
-import { NewsArticle } from '../../components/NewsArticle';
 import { NewsCategory } from '../../constants';
 import { NewsTags } from '../../components/NewsTags';
 import { SearchInput } from '../../components/SearchInput';
+import TrendingNewsArticle from '../../components/TrendingNewsArticle';
 import styles from './styles';
 
 
@@ -28,7 +28,7 @@ const Search = () => {
         showsVerticalScrollIndicator={false}
         data={searchText?.trim() ? searchResults : null}
         renderItem={({ item, index }: any) => (
-          <NewsArticle post={item} index={index} />
+          <TrendingNewsArticle post={item} index={index} />
         )}
         style={styles.list}
       />

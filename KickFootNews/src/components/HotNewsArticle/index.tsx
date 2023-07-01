@@ -1,9 +1,9 @@
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import moment from 'moment';
-import React, {useCallback} from 'react';
-import {Image, Text, TouchableOpacity, View} from 'react-native';
+import React, { useCallback } from 'react';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import {SharedElement} from 'react-navigation-shared-element';
+import { SharedElement } from 'react-navigation-shared-element';
 import styles from './styles';
 
 type Post = {
@@ -14,22 +14,20 @@ type Post = {
   author: string;
 };
 
-export const NewsArticle: React.FC<{
+export const HotNewsArticle: React.FC<{
   post: Post;
   index: number;
-}> = ({post, index}) => {
+}> = ({ post, index }) => {
   const navigation: any = useNavigation();
   const handleNavigate = useCallback(() => {
-    navigation.navigate('NewsDetails', {article: post, articleIndex: index});
+    navigation.navigate('NewsDetails', { article: post, articleIndex: index });
   }, [index, navigation, post]);
 
   return (
     <TouchableOpacity
       activeOpacity={1}
-      style={styles.container}
       onPress={handleNavigate}>
-      <View
-        style={styles.imageContainer}>
+      <View>
         <Image
           source={{
             uri:
@@ -37,16 +35,21 @@ export const NewsArticle: React.FC<{
           }}
           resizeMode={'cover'}
           style={styles.image}
+          blurRadius={3}
         />
       </View>
-      <LinearGradient
-        colors={['#000A', '#000A', '#000']}
+      <View
         style={styles.titleContainer}>
+        <View style={styles.timestampContainer}>
+          <Text style={styles.hotNews}>Hot News</Text>
+
+          {/* <Text style={styles.timestamp}>
+            {moment(post?.publishedAt).format('HH:MM DD, MMMM')}
+          </Text> */}
+        </View>
         <Text style={styles.text} numberOfLines={2}>{post?.title}</Text>
-        <Text style={styles.timestamp}>
-          {moment(post?.publishedAt).format('HH:MM DD, MMMM')}
-        </Text>
-      </LinearGradient>
+
+      </View>
     </TouchableOpacity>
   );
 };

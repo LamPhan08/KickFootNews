@@ -3,6 +3,7 @@ import {Dimensions, StyleSheet} from 'react-native'
 export default StyleSheet.create({
     matchesContainer: {
         flex: 1,
+        marginBottom: 60
     },
     calendarStrip: {
         paddingTop: 5, 

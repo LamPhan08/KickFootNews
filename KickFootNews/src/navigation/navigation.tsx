@@ -12,6 +12,7 @@ import EditProfile from '../screens/EditProfile';
 import QuizDetails from '../screens/QuizDetails';
 import Quizzes from '../screens/Quizzes';
 import MatchDetails from '../screens/MatchDetails';
+import TrendingNewsList from '../screens/TrendingNewsList';
 
 const Stack = createSharedElementStackNavigator();
 
@@ -19,7 +20,7 @@ export const RootNavigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Splash">
+        initialRouteName="Home">
         <Stack.Screen name="Home" component={Tabs} options={{headerShown: false, title: ''}}/>
         <Stack.Screen
           name="NewsDetails"
@@ -51,6 +52,9 @@ export const RootNavigation = () => {
         }}/>
         <Stack.Screen name="QuizDetails" component={QuizDetails} options={{
           headerShown: false
+        }}/>
+        <Stack.Screen name="TrendingNewsList" component={TrendingNewsList} options={{
+          title: ''
         }}/>
 
       </Stack.Navigator>

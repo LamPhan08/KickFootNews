@@ -1,6 +1,6 @@
 import React from 'react'
 import { ScrollView, FlatList, SafeAreaView } from 'react-native'
-import { NewsArticle } from '../../components/NewsArticle'
+import { HotNewsArticle } from '../../components/HotNewsArticle'
 import styles from './styles'
 
 //Dữ liệu mẫu
@@ -38,7 +38,7 @@ const Bookmark = () => {
         showsHorizontalScrollIndicator={false}
         data={exampleDatas}
         renderItem={({ item, index }) => {
-          return (<NewsArticle post={item} index={index} />)
+          return (<HotNewsArticle post={item} index={index} />)
         }}
         style={styles.bookmarkList}>
 

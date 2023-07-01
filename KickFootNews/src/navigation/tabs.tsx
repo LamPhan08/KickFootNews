@@ -29,8 +29,14 @@ const Tabs = () => {
     }} initialRouteName='Feed'>
         <Tab.Screen name='Feed' component={Feed} options={{
             tabBarIcon: ({focused}) => <Iconicons name='home-sharp' size={22} color={focused ? "#08812f" : "gray"}/>,
-            headerShown: false,
-            tabBarLabel: 'Home'
+            // headerTitleAlign: 'center',
+            // headerTitleStyle: {
+            //     fontSize: 20,
+            //     fontWeight: '600'
+            // },
+            title: 'KICKFOOT NEWS',
+            headerTitleStyle: {fontSize: 25, fontWeight: 'bold'},
+            headerStyle: {height: 70}
         }}/>
         <Tab.Screen name='Matches' component={Matches} options={{
             tabBarIcon: ({focused}) => <Material name='soccer-field' size={29} color={focused ? "#08812f" : "gray"}/>,
