@@ -1,5 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState,useEffect } from 'react';
+import firestore, { FirebaseFirestoreTypes } from '@react-native-firebase/firestore';
+import auth from '@react-native-firebase/auth';
 import {
     ImageBackground,
     Linking,
@@ -50,17 +52,60 @@ export const NewsDetails: React.FC<{ route: Route }> = ({ route }) => {
     const [bookmarked, setBookmarked] = useState(false)
 
     const handleBookmark = () => { // Hàm để lưu các dữ liệu vào csdl gồm: title, description, url, urlToImage, publishedAt
-        setBookmarked(!bookmarked)
-
         
-
-        if(bookmarked) {
+        if(bookmarked) {           
+            firestore()
+            .collection('bookmarks')
+            .doc(auth().currentUser?.uid)
+            .collection('articles_saved')
+            .doc(article.url.replaceAll('/','.'))
+            .delete()
+            .then(() => {
+              console.log('Artilces removed');
+            })           
             ToastAndroid.show('Article removed', ToastAndroid.BOTTOM)
         }
         else {
+            firestore()
+            .collection('bookmarks')
+            .doc(auth().currentUser?.uid)
+            .collection('articles_saved')
+            .doc(article.url.replaceAll('/','.'))
+            .set({
+              title: article.title,
+              description: article.description,
+              url: article.url,
+              urlToImage:article.urlToImage,
+              publishedAt: article.publishedAt
+            })
+            .then(() => {
+              console.log('Artilces saved');
+            })
+
             ToastAndroid.show('Article saved', ToastAndroid.BOTTOM)
         }
     }
+    useEffect(() => {
+        async function getBookMarked() { 
+            firestore()
+            .collection('bookmarks')
+            .doc(auth().currentUser?.uid)
+            .collection('articles_saved')
+            .doc(article.url.replaceAll('/','.'))
+                .onSnapshot(
+                documentSnapshot => {
+                
+                    if (documentSnapshot.exists) {
+                        setBookmarked(!bookmarked)
+                    }
+                    else{
+                        setBookmarked(bookmarked)
+                    }
+                });
+        }
+    
+        getBookMarked();
+    }, []);
 
     return (
         <>

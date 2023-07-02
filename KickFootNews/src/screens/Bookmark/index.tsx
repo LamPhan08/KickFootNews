@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { ScrollView, FlatList, SafeAreaView } from 'react-native'
 import { HotNewsArticle } from '../../components/HotNewsArticle'
 import styles from './styles'
-
+import firestore, { FirebaseFirestoreTypes } from '@react-native-firebase/firestore';
+import auth from '@react-native-firebase/auth';
 //Dữ liệu mẫu
 const exampleDatas = [
   {
@@ -31,12 +32,30 @@ const exampleDatas = [
   }
 ]
 
+
 const Bookmark = () => {
+  const [bookmarks, setBookMarks] = useState([]);
+
+  useEffect(() => {
+    async function fetchBookMarks() {    
+         const savedNews = []   
+        const querySnapshot = await firestore() .collection('bookmarks')
+        .doc(auth().currentUser?.uid)
+        .collection('articles_saved').get();
+        querySnapshot.forEach((doc) => {
+            console.log(doc.id, " => ", doc.data());
+            savedNews.push(doc.data());
+        });
+        setBookMarks(savedNews);
+    }
+
+    fetchBookMarks();
+}, []);
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
         showsHorizontalScrollIndicator={false}
-        data={exampleDatas}
+        data={bookmarks}
         renderItem={({ item, index }) => {
           return (<HotNewsArticle post={item} index={index} />)
         }}

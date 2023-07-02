@@ -2,7 +2,7 @@
   "compilerOptions": {
     "jsx": "react",
     "lib": [
-      "dom", "ES2017"
+      "dom", "ES2017","ES2021.String"
     ]
   },
   "extends": "@tsconfig/react-native/tsconfig.json"
