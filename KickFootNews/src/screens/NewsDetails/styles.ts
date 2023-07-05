@@ -3,6 +3,7 @@ import {StyleSheet} from 'react-native';
 export default StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#fff'
   },
   contentContainer: {
     paddingBottom: 120,
@@ -36,13 +37,15 @@ export default StyleSheet.create({
     lineHeight: 30,
     paddingHorizontal: 24,
     marginVertical: 18,
+    color: '#000'
   },
   content: {
     fontSize: 16,
     fontWeight: '400',
     lineHeight: 22,
     paddingHorizontal: 18,
-    marginTop: 20
+    marginTop: 20,
+    color: '#000'
   },
   readMoreContainer: {
     position: 'absolute',
@@ -51,11 +54,13 @@ export default StyleSheet.create({
     paddingHorizontal: 24,
     bottom: 0,
     width: '100%',
+    backgroundColor: '#ddd'
   },
   readMoreText: {
     fontSize: 13,
     fontWeight: '300',
     lineHeight: 22,
+    color: '#000'
   },
   link: {
     color: '#00beff',

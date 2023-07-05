@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, SafeAreaView, ScrollView, TouchableOpacity, Image } from 'react-native'
+import { View, Text, SafeAreaView, ScrollView, TouchableOpacity, Image, RefreshControl } from 'react-native'
 import styles from './styles'
 import { useDispatch, useSelector } from 'react-redux';
 import { getLineups } from '../../redux/actions';
@@ -14,9 +14,10 @@ const MatchLineup = ({ route }: any) => {
 
   const { lineup } = useSelector((state: any) => state.feedReducer)
   const dispatch: Function = useDispatch()
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
-    dispatch(getLineups(fixtureData.fixture.id));
+    dispatch(getLineups(fixtureData.fixture.id, setIsLoading));
   }, [dispatch])
 
   // console.log(fixtureData.fixture.id)
@@ -55,7 +56,7 @@ const MatchLineup = ({ route }: any) => {
           <Text style={styles.notAvailable}>The line-ups aren't available yet.</Text>
           <Text style={styles.notAvailable}>Check back later!</Text>
         </View>
-        : <ScrollView showsVerticalScrollIndicator={false} style={{ paddingTop: 15 }}>
+        : <ScrollView showsVerticalScrollIndicator={false} style={{ paddingTop: 15 }} refreshControl={<RefreshControl refreshing={isLoading}/>}>
           <View style={styles.teamTab}>
             <TouchableOpacity style={[styles.btnTab, status === lineup[0].team.name && styles.btnTabActive]}
               onPress={() => setStatusFilter(lineup[0].team.name)}>

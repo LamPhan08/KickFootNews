@@ -60,6 +60,7 @@ export default StyleSheet.create({
         fontSize: 12,
         width:100,
         textAlign: 'center',
-        marginHorizontal: 5
+        marginHorizontal: 5,
+        color: 'grey'
     }
 })

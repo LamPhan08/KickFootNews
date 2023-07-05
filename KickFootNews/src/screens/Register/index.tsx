@@ -123,6 +123,7 @@ const Register = () => {
                       style={styles.inputEmail}
                       placeholder="Enter Name"
                       onChangeText={username => setUsername(username)}
+                      placeholderTextColor='grey'
                     />
 
                     {(errors.name && touched.name) &&
@@ -136,6 +137,7 @@ const Register = () => {
                       placeholder="Enter Email"
                       keyboardType="email-address"
                       onChangeText={email => setEmail(email)}
+                      placeholderTextColor='grey'
                     />
                     {(errors.email && touched.email) &&
                       <Text style={{ fontSize: 10, color: 'red', marginTop: scale(5) }}> {errors.email}</Text>}
@@ -150,6 +152,7 @@ const Register = () => {
                           secureTextEntry={showPassword}
                           style={{ height: scale(50), color: 'black', width: '93%', fontWeight: 'bold' }}
                           onChangeText={password => setPassword(password)}
+                          placeholderTextColor='grey'
                         />
                         {/* </View> */}
 
@@ -178,6 +181,7 @@ const Register = () => {
                           onChangeText={(repass) => {
                             setRePass(repass)
                           }}
+                          placeholderTextColor='grey'
                         />
                         {/* </View> */}
 
@@ -221,7 +225,7 @@ const Register = () => {
 
         <View style={styles.footerContainer}>
           <View style={styles.footerContainerInner}>
-            <Text style={{ fontWeight: 'bold' }}>
+            <Text style={{ fontWeight: 'bold', color: 'grey' }}>
               Already have an account?
             </Text>
 

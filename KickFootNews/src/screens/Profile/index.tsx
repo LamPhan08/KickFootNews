@@ -16,25 +16,28 @@ const Profile = () => {
     auth()
       .signOut()
       .then(() => {
-        console.log('User signed out!');
+        // console.log('User signed out!');
         navigation.replace('Login');
       });
   }
-  const [userData, setUserData] = useState({ phone: '', name: '', avatar: '' ,email:''});
+  const [userData, setUserData] = useState({ phone: '', name: '', avatar: '', email: '' });
   const [image, setImage] = useState('');
   const getUser = async () => {
-      await firestore()
+    await firestore()
       .collection('users')
       .doc(auth().currentUser?.uid)
       .onSnapshot(documentSnapshot => {
-      console.log('User data: ', documentSnapshot.data());
-      setUserData(documentSnapshot.data() as React.SetStateAction<{ phone: string; name: string; avatar: string;email:string }>);
+        // console.log('User data: ', documentSnapshot.data());
+        setUserData(documentSnapshot.data() as React.SetStateAction<{ phone: string; name: string; avatar: string; email: string }>);
       });
-      
+
   }
   useEffect(() => {
     getUser();
   }, []);
+
+  console.log(userData)
+
   return (
     <>
       <SafeAreaView style={styles.container}>
@@ -52,7 +55,7 @@ const Profile = () => {
                 }} style={{ backgroundColor: '#fff', height: 80, width: 80, borderRadius: 50 }} />
 
                 <Title style={styles.title}>
-                {userData ? userData.name : ''}
+                  {userData ? userData.name : ''}
                 </Title>
               </View>
 
@@ -63,13 +66,15 @@ const Profile = () => {
           </View>
 
           {userData ? <View style={styles.userInfoSection}>
-            <View style={styles.row}>
-              <Icon name="phone" color="#fff" size={20} />
-              <Text style={{ color: "#fff", marginLeft: 20 }}>{userData ? userData.phone : ''}</Text>
-            </View>
+            {userData.hasOwnProperty('phone')
+              ? <View style={styles.row}>
+                <Icon name="phone" color="#fff" size={20} />
+                <Text style={{ color: "#fff", marginLeft: 20 }}>{userData ? userData.phone : ''}</Text>
+              </View>
+              : null}
             <View style={styles.row}>
               <Icon name="email" color="#fff" size={20} />
-              <Text style={{ color: "#fff", marginLeft: 20 }}>{userData ? userData.email : ''}</Text>
+              <Text style={{ color: "#fff", marginLeft: 20 }}>{auth().currentUser?.email}</Text>
             </View>
           </View> : null}
         </LinearGradient>

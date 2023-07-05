@@ -17,6 +17,7 @@ export default StyleSheet.create({
     height: 40,
     paddingHorizontal: 24,
     fontWeight: '400',
-    width: '100%'
+    width: '100%',
+    color: '#000'
   },
 });

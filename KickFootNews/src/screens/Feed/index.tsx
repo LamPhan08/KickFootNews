@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback, useState } from 'react';
-import { TouchableOpacity, RefreshControl, Text, useColorScheme, View, ToastAndroid, ScrollView, FlatList } from 'react-native';
+import { TouchableOpacity, RefreshControl, Text, View, ToastAndroid, ScrollView, FlatList } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { getNewsFeed } from '../../redux/actions';
 import { HotNewsArticle } from '../../components/HotNewsArticle';
@@ -27,9 +27,6 @@ export const Feed: React.FC = () => {
     }, [dispatch]);
 
 
-
-    const backgroundColor = useColorScheme() === 'dark' ? '#000' : '#fff';
-
     // console.log(newsFeed)
 
     const handleNavigate = () => {
@@ -39,7 +36,7 @@ export const Feed: React.FC = () => {
 
 
     return (
-        <ScrollView style={[styles.container, { backgroundColor }]}
+        <ScrollView style={styles.container}
             refreshControl={<RefreshControl refreshing={isLoading} onRefresh={handleRefresh} />}
             showsVerticalScrollIndicator={false}
         >

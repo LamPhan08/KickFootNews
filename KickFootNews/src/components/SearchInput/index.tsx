@@ -11,7 +11,6 @@ export const SearchInput: React.FC <{
     setSearchText: Function;
     setIsLoading: Function;
 }> = ({searchText, setSearchText, setIsLoading}) => {
-    const placeholderColor = useColorScheme() === 'dark' ? '#eee' : '#111';
     const dispatch: Function = useDispatch();
     const searchForText = useCallback (
         debounce((text: string) => {
@@ -28,7 +27,7 @@ export const SearchInput: React.FC <{
         <View style={styles.container}>
             <TextInput
             placeholder="Search"
-            placeholderTextColor={placeholderColor}
+            placeholderTextColor='#000'
             style={styles.input}
             value={searchText}
             onChangeText={(text: string) => {

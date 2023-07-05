@@ -45,7 +45,8 @@ export default StyleSheet.create({
 
     leagueRound: {
         fontWeight: '400',
-        fontSize: 15
+        fontSize: 15,
+        color: 'grey'
     },
 
     noMatches: {

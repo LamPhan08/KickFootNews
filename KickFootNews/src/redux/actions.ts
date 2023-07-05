@@ -88,9 +88,9 @@ export const getMatches = (fixtureDate: string = '', setIsLoading: Function = ()
 export const EVENT = 'EVENT';
 
 
-export const getEvents = (fixtureId: number) => async (dispatch: Function) => {
+export const getEvents = (fixtureId: number, setIsLoading: Function) => async (dispatch: Function) => {
     try {
-
+        setIsLoading(true);
         const res = await matchApi.get('fixtures/events', {params: {
             fixture: fixtureId
         },});
@@ -101,7 +101,7 @@ export const getEvents = (fixtureId: number) => async (dispatch: Function) => {
         });
 
         // console.log(res.data.errors)
-
+        setIsLoading(false);
       
     } catch (error) {
       console.error(error)
@@ -111,9 +111,9 @@ export const getEvents = (fixtureId: number) => async (dispatch: Function) => {
 export const LINEUPS = 'LINEUPS';
 
 
-export const getLineups = (fixtureId: number) => async (dispatch: Function) => {
+export const getLineups = (fixtureId: number, setIsLoading: Function) => async (dispatch: Function) => {
     try {
-
+        setIsLoading(true);
         const res = await matchApi.get('fixtures/lineups', {params: {
             fixture: fixtureId
         },});
@@ -125,6 +125,29 @@ export const getLineups = (fixtureId: number) => async (dispatch: Function) => {
 
         // console.log(res.data.response)
 
+        setIsLoading(false);
+    } catch (error) {
+      console.error(error)
+    }
+};
+
+export const STATISTICS = 'STATISTICS';
+
+
+export const getStatistics = (fixtureId: number, setIsLoading: Function) => async (dispatch: Function) => {
+    try {
+        setIsLoading(true);
+        const res = await matchApi.get('fixtures/statistics', {params: {
+            fixture: fixtureId
+        },});
+
+        dispatch({
+          type: STATISTICS,
+          payload: res?.data?.response
+        });
+
+        // console.log(res.data.response)
+        setIsLoading(false);
       
     } catch (error) {
       console.error(error)

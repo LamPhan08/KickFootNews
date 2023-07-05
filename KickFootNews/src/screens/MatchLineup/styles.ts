@@ -24,7 +24,8 @@ export default StyleSheet.create({
 
     labelTab: {
         fontWeight: '600',
-        textTransform: 'uppercase'
+        textTransform: 'uppercase',
+        color: 'grey'
     },
 
     labelTabActive: {

@@ -159,6 +159,7 @@ const Login = () => {
                       placeholder="Enter Email"
                       keyboardType="email-address"
                       onChangeText={email => setEmail(email)}
+                      placeholderTextColor='grey'
                     />
                     {(errors.email && touched.email) &&
                       <Text style={{ fontSize: 10, color: 'red', marginTop: scale(5) }}> {errors.email}</Text>}
@@ -173,6 +174,7 @@ const Login = () => {
                           secureTextEntry={showPassword}
                           style={{ height: scale(50), color: 'black', width: '93%', fontWeight: 'bold' }}
                           onChangeText={password => setPassword(password)}
+                          placeholderTextColor='grey'
                         />
                         {/* </View> */}
 
@@ -191,13 +193,13 @@ const Login = () => {
                       <Text style={{ fontSize: 10, color: 'red', marginTop: scale(5) }}> {errors.password}</Text>}
                   </View>
 
-                  <View style={styles.forgotPasswordContainer}>
+                  {/* <View style={styles.forgotPasswordContainer}>
                     <TouchableOpacity>
                       <Text style={styles.forgotPasswordText}>
                         Forgot Password?
                       </Text>
                     </TouchableOpacity>
-                  </View>
+                  </View> */}
                 </View>
 
 
@@ -222,7 +224,7 @@ const Login = () => {
         <View style={styles.footerContainer}>
 
           <View style={styles.footerContainerInner}>
-            <Text style={{ fontWeight: 'bold' }}>
+            <Text style={{ fontWeight: 'bold', color: 'grey' }}>
               Don't have an account?
             </Text>
 
@@ -257,9 +259,9 @@ const Login = () => {
                 }>
                 <Icon name='logo-google' size={30} color='black' />
               </TouchableOpacity>
-              <TouchableOpacity style={{ padding: 10, backgroundColor: '#d8d8d8', borderRadius: 50 }}>
+              {/* <TouchableOpacity style={{ padding: 10, backgroundColor: '#d8d8d8', borderRadius: 50 }}>
                 <Icon name='logo-facebook' size={30} color='black' />
-              </TouchableOpacity>
+              </TouchableOpacity> */}
             </View>
           </View>
 

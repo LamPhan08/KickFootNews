@@ -8,7 +8,6 @@ import {
     ScrollView,
     Text,
     TouchableOpacity,
-    useColorScheme,
     View,
     ToastAndroid
 } from 'react-native';
@@ -38,11 +37,6 @@ interface Route {
 export const NewsDetails: React.FC<{ route: Route }> = ({ route }) => {
     const { article, articleIndex } = route?.params;
 
-    const backgroundColor = useColorScheme() === 'dark' ? '#000' : '#fff';
-    const color = useColorScheme() === 'dark' ? '#fff' : '#000';
-    const contentColor = useColorScheme() === 'dark' ? '#bbb' : '#444';
-    const readMoreBgColor = useColorScheme() === 'dark' ? '#222' : '#ddd';
-
     const handleURLPress = useCallback(() => {
         Linking.openURL(article?.url);
     }, [article]);
@@ -63,7 +57,7 @@ export const NewsDetails: React.FC<{ route: Route }> = ({ route }) => {
             .then(() => {
               console.log('Artilces removed');
             })           
-            ToastAndroid.show('Article removed', ToastAndroid.BOTTOM)
+            ToastAndroid.show('Article removed!', ToastAndroid.BOTTOM)
         }
         else {
             firestore()
@@ -82,7 +76,7 @@ export const NewsDetails: React.FC<{ route: Route }> = ({ route }) => {
               console.log('Artilces saved');
             })
 
-            ToastAndroid.show('Article saved', ToastAndroid.BOTTOM)
+            ToastAndroid.show('Article saved!', ToastAndroid.BOTTOM)
         }
     }
     useEffect(() => {
@@ -112,9 +106,9 @@ export const NewsDetails: React.FC<{ route: Route }> = ({ route }) => {
             <ScrollView
                 bounces={false}
                 showsVerticalScrollIndicator={false}
-                style={[styles.container, { backgroundColor }]}
+                style={styles.container}
                 contentContainerStyle={styles.contentContainer}>
-                <Text style={[styles.title, { color }]}>{article?.title}</Text>
+                <Text style={styles.title}>{article?.title}</Text>
 
                 <View style={styles.authorPublishedContainer}>
 
@@ -141,13 +135,13 @@ export const NewsDetails: React.FC<{ route: Route }> = ({ route }) => {
                     resizeMode={'cover'}
                 />
 
-                <Text style={[styles.content, { color: contentColor }]}>
+                <Text style={styles.content}>
                     {article?.description}
                 </Text>
             </ScrollView>
             <View
-                style={[styles.readMoreContainer, { backgroundColor: readMoreBgColor }]}>
-                <Text style={[styles.readMoreText, { color }]} numberOfLines={2}>
+                style={styles.readMoreContainer}>
+                <Text style={styles.readMoreText} numberOfLines={2}>
                     Read more at{' '}
                     <Text style={styles.link} onPress={handleURLPress}>
                         {article?.url}

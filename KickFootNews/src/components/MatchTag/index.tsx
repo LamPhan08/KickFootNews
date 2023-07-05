@@ -64,7 +64,7 @@ const MatchTag: React.FC<{ fixture: Fixture }> = ({ fixture }) => {
     <View>
       <View style={[styles.line, { marginRight: 15}]} />
 
-      <TouchableOpacity style={styles.matchIn4} onPress={() => navigation.navigate('MatchDetails', { fixture })}>
+      <TouchableOpacity style={styles.matchIn4} onPress={() => navigation.navigate('MatchDetails', {fixture})}>
         <View style={styles.teamIn4}>
           <View style={styles.teamLogoAndName}>
             <Image source={{ uri: fixture.teams.home.logo }} style={styles.logo} />
@@ -96,7 +96,7 @@ const MatchTag: React.FC<{ fixture: Fixture }> = ({ fixture }) => {
 
           <View style={[styles.line, { height: '100%', width: 1 }]} />
 
-          <View style={styles.matchStatus}>
+          <View>
             <Text style={styles.status}>{fixture.fixture.status.short === 'NS' ? fixture.fixture.date.slice(11, 16) : fixture.fixture.status.short}</Text>
           </View>
         </View>

@@ -114,7 +114,7 @@ const matchData = [
 const Matches = () => {
   let { match } = useSelector((state: any) => state.feedReducer)
   const dispatch: Function = useDispatch();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
 
   let today = moment().format('YYYY-MM-DD')

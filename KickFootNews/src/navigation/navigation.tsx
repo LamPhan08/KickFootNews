@@ -20,7 +20,7 @@ export const RootNavigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Home">
+        initialRouteName="Splash">
         <Stack.Screen name="Home" component={Tabs} options={{headerShown: false, title: ''}}/>
         <Stack.Screen
           name="NewsDetails"
@@ -54,7 +54,8 @@ export const RootNavigation = () => {
           headerShown: false
         }}/>
         <Stack.Screen name="TrendingNewsList" component={TrendingNewsList} options={{
-          title: ''
+          title: 'Trending News',
+          headerTitleAlign: 'center'
         }}/>
 
       </Stack.Navigator>

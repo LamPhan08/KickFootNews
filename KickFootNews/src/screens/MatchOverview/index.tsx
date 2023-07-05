@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { View, Text, SafeAreaView, ScrollView, Image } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { View, Text, SafeAreaView, ScrollView, Image, RefreshControl } from 'react-native'
 import styles from './styles'
 import missPen from '../../assets/missedPenalty.png'
 import normalGoal from '../../assets/normalGoal.png'
@@ -13,7 +13,6 @@ import varIcon from '../../assets/var.png'
 import { useDispatch, useSelector } from 'react-redux';
 import { getEvents } from '../../redux/actions';
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import { eventData } from './eventData'
 
 
 
@@ -24,9 +23,11 @@ const MatchOverview = ({ route }: any) => {
   const { event } = useSelector((state: any) => state.feedReducer)
   const dispatch: Function = useDispatch()
 
+  const [isLoading, setIsLoading] = useState(false)
+
 
   useEffect(() => {
-    dispatch(getEvents(fixtureData.fixture.id));
+    dispatch(getEvents(fixtureData.fixture.id, setIsLoading));
   }, [dispatch])
 
 
@@ -273,7 +274,9 @@ const MatchOverview = ({ route }: any) => {
 
   return (
     <SafeAreaView>
-      <ScrollView style={{ paddingTop: 10 }} showsVerticalScrollIndicator={false}>
+      <ScrollView style={{ paddingTop: 10 }} 
+      showsVerticalScrollIndicator={false}
+      refreshControl={<RefreshControl refreshing={isLoading}/>}>
         <View style={styles.scoreContainer}>
           <View style={styles.team}>
             <Image source={{ uri: fixtureData.teams.home.logo }} style={styles.teamLogo} />

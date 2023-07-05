@@ -44,7 +44,8 @@ export default StyleSheet.create({
 
     status: {
         fontSize: 13,
-        fontWeight: '600'
+        fontWeight: '600',
+        color: 'grey'
     },
 
     eventContainer: {
@@ -146,6 +147,7 @@ export default StyleSheet.create({
     },
 
     displayedIn4: {
-        fontSize: 14
+        fontSize: 14,
+        color: 'grey'
     }
 })

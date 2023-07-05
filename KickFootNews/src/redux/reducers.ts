@@ -1,11 +1,12 @@
-import { GET_NEWS_FEED, SEARCH_NEWS, RESET_SEARCH_RESULTS, MATCH, EVENT, LINEUPS } from "./actions";
+import { GET_NEWS_FEED, SEARCH_NEWS, RESET_SEARCH_RESULTS, MATCH, EVENT, LINEUPS, STATISTICS } from "./actions";
 
 const initialState = {
     newsFeed: [],
     searchResults: [],
     match: [],
     event: [],
-    lineup: []
+    lineup: [],
+    statistic: []
 };
 
 const feedReducer = (state = initialState, action: { type: String; payload: any },) => {
@@ -29,6 +30,9 @@ const feedReducer = (state = initialState, action: { type: String; payload: any 
         }
         case LINEUPS: {
             return {...state, lineup: action.payload}
+        }
+        case STATISTICS: {
+            return {...state, statistic: action.payload}
         }
 
         default:
