@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "269627309539-jbfd2r7l2bcdelf1b57itai822n3ml1g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kickfootnews",
+            "certificate_hash": "19ee47947746206e108e0059568536324915c727"
+          }
+        },
+        {
           "client_id": "269627309539-55jdltj2n4tt6res0826ce8vrjpckmss.apps.googleusercontent.com",
           "client_type": 3
         }
