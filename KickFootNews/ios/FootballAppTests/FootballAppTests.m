@@ -7,11 +7,11 @@
 #define TIMEOUT_SECONDS 600
 #define TEXT_TO_LOOK_FOR @"Welcome to React"
 
-@interface FootballAppTests : XCTestCase
+@interface KickFootNewsTests : XCTestCase
 
 @end
 
-@implementation FootballAppTests
+@implementation KickFootNewsTests
 
 - (BOOL)findSubviewInView:(UIView *)view matching:(BOOL (^)(UIView *view))test
 {

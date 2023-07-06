@@ -45,7 +45,8 @@ export default StyleSheet.create({
 
     articleTimestamp: {
          fontSize: 11,
-         fontWeight: '600'       
+         fontWeight: '600',
+         color: 'grey'     
     },
 
     articleTitle: {

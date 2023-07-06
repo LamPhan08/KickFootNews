@@ -1,4 +1,4 @@
-package com.footballapp;
+package com.kickfootnews;
 
 import android.app.Application;
 import com.facebook.react.PackageList;

@@ -117,7 +117,7 @@ export const NewsDetails: React.FC<{ route: Route }> = ({ route }) => {
                         <ImageBackground source={require(`../../assets/author.png`)} style={styles.authorIcon} alt='author'/>
                         <View style={styles.authorAndPublished}>
                             <Text style={styles.name}>Sky Sports</Text>
-                            <Text>{moment(article.publishedAt).format('HH:MM DD, MMMM')}</Text>
+                            <Text style={{color: 'grey'}}>{moment(article.publishedAt).format('HH:MM DD, MMMM')}</Text>
                         </View>
 
 
