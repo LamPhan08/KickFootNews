@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback, memo, PureComponent } from 'react'
-import { View, Text, Image, SafeAreaView, FlatList, RefreshControl } from 'react-native'
+import { View, Text, Image, SafeAreaView, FlatList, RefreshControl, ActivityIndicator } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { getMatches } from '../../redux/actions'
 import moment from 'moment'
@@ -157,7 +157,7 @@ const Matches = () => {
         selectedDate={moment()}
         onDateSelected={(params) => {
           let timestamp = params.format('YYYY-MM-DD')
-
+          setIsLoading(true)
           handleChooseDate(timestamp)
           setDate(timestamp)
         }}
@@ -169,13 +169,15 @@ const Matches = () => {
       maxDate={moment().add(10, 'days')}/>
 
       <View style={{ paddingBottom: 20 }} >
-        {(Object.keys(matchByLeague).length === 0) ? <View style={styles.noMatches}>
-          <Image source={footballPlayer} style={styles.footballPlayer}/>
+        {(Object.keys(matchByLeague).length === 0) ? 
+        <View style={styles.noMatches}>
+          {/* <Image source={footballPlayer} style={styles.footballPlayer}/>
           <Text style={styles.noMatchesNotification}>
             No matches on this day
-          </Text>
+          </Text> */}
+          <ActivityIndicator size={'large'} color='#000'/>
         </View>
-          :
+         :
         <FlatList showsVerticalScrollIndicator={false}
           refreshControl={<RefreshControl refreshing={isLoading} />}
           data={Object.values(matchByLeague)}
@@ -187,7 +189,7 @@ const Matches = () => {
           updateCellsBatchingPeriod={100}
           windowSize={7}>
         </FlatList>
-        } 
+        }
 
 
       </View>

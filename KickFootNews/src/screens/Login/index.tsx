@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, ScrollView, TextInput, TouchableOpacity, ToastAndroid, ActivityIndicator } from 'react-native'
+import { View, Text, ScrollView, TextInput, TouchableOpacity, ToastAndroid, ActivityIndicator, Image } from 'react-native'
 import styles from './styles'
 import { Formik } from 'formik'
 import * as yup from 'yup'
@@ -9,6 +9,7 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import auth from '@react-native-firebase/auth';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import firestore, { FirebaseFirestoreTypes } from '@react-native-firebase/firestore';
+import google from '../../assets/google.png'
 
 const signInValidationSchema = yup.object().shape({
   email: yup.string()
@@ -234,12 +235,12 @@ const Login = () => {
           </View>
 
           <View style={styles.otherLogin}>
-            <Text style={{ color: "#08812f", fontWeight: "bold", fontSize: 15 }}>
+            <Text style={{ color: "#08812f", fontWeight: "bold", fontSize: 15,}}>
               Or continue with
             </Text>
 
-            <View style={{ flexDirection: 'row', justifyContent: 'center', marginTop: '5%', gap: 30 }}>
-              <TouchableOpacity style={{ padding: 10, backgroundColor: '#d8d8d8', borderRadius: 50 }}
+            
+              <TouchableOpacity style={{ padding: 10, backgroundColor: '#fff', borderRadius: 10, width: '98%', elevation: 3, marginVertical: 20, flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}
                 onPress={() => onGoogleButtonPress()
                   .then(() => {
                     console.log('Signed in with Google!');
@@ -253,17 +254,18 @@ const Login = () => {
                     .then(() => {
                       console.log('User Signed up!');
                     })
-                    navigation.navigate('Home');
+                    // navigation.replace('Home');
                   }
                   )
                 }>
-                <Icon name='logo-google' size={30} color='black' />
+                <Image source={google} style={{width: 30, height: 30}}/>
+
+                <Text style={{color: '#000', marginLeft: 10, fontWeight: '600'}}>Sign in with Google</Text>
               </TouchableOpacity>
-              {/* <TouchableOpacity style={{ padding: 10, backgroundColor: '#d8d8d8', borderRadius: 50 }}>
-                <Icon name='logo-facebook' size={30} color='black' />
-              </TouchableOpacity> */}
-            </View>
+
+              
           </View>
+          
 
 
         </View>

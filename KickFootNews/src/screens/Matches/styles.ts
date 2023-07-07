@@ -50,7 +50,7 @@ export default StyleSheet.create({
     },
 
     noMatches: {
-        marginTop: Dimensions.get('window').height/5,
+        marginTop: Dimensions.get('window').height/3,
         justifyContent: 'center',
         alignItems: 'center',
     },

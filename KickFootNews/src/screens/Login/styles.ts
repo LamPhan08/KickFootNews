@@ -80,6 +80,7 @@ export default StyleSheet.create({
     otherLogin: {
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: '15%',
+        marginTop: '10%',
+        width: '100%'
     }
 })

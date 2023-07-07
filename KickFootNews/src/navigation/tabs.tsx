@@ -47,8 +47,10 @@ const Tabs = () => {
         }}/>
         <Tab.Screen name='Search' component={Search} options={{
             tabBarIcon: ({focused}) => <FontAwesome name='search' size={22} color={focused ? "#08812f" : "gray"}/>,
-            headerShown: false,
-            tabBarLabel: 'Explore'
+            // headerShown: false,
+            title: 'Explore',
+            headerTitleStyle: {fontSize: 25, fontWeight: 'bold'},
+            headerStyle: {height: 70, borderBottomColor: '#ddd', borderBottomWidth: 0.5}
         }}/>
         <Tab.Screen name='Profile' component={Profile} options={{
             tabBarIcon: ({focused}) => <Iconicons name='person-sharp' size={22} color={focused ? "#08812f" : "gray"}/>,

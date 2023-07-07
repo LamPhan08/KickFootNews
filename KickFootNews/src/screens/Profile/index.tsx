@@ -9,7 +9,8 @@ import AntDesign from 'react-native-vector-icons/AntDesign'
 import LinearGradient from 'react-native-linear-gradient'
 import { useNavigation } from '@react-navigation/native'
 import auth from '@react-native-firebase/auth';
-import firestore, { FirebaseFirestoreTypes } from '@react-native-firebase/firestore';
+import firestore, { FirebaseFirestoreTypes, } from '@react-native-firebase/firestore';
+import { GoogleSignin } from '@react-native-google-signin/google-signin'
 const Profile = () => {
   const navigation: any = useNavigation();
   const onLogout = () => {
@@ -17,7 +18,8 @@ const Profile = () => {
       .signOut()
       .then(() => {
         // console.log('User signed out!');
-        navigation.replace('Login');
+        GoogleSignin.revokeAccess();
+        // navigation.replace('Login');
       });
   }
   const [userData, setUserData] = useState({ phone: '', name: '', avatar: '', email: '' });

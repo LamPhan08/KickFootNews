@@ -1,10 +1,10 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 
 export default StyleSheet.create({
     container: {
         flex: 1,
         flexGrow: 1,
-        paddingTop: 20,
+        paddingTop: 10,
         backgroundColor: '#fff'
     },
 
@@ -13,4 +13,9 @@ export default StyleSheet.create({
         flexGrow: 1,
         paddingVertical: 8,
     },
+
+    noSearchResults: {
+        alignItems: 'center',
+        marginTop: 50
+    }
 });

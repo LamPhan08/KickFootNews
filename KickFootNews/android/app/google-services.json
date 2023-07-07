@@ -7,18 +7,34 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:269627309539:android:2b2eedd3be75c129aaf4d6",
+        "mobilesdk_app_id": "1:269627309539:android:6f14c3f795e7c4f2aaf4d6",
         "android_client_info": {
           "package_name": "com.kickfootnews"
         }
       },
       "oauth_client": [
         {
-          "client_id": "269627309539-jbfd2r7l2bcdelf1b57itai822n3ml1g.apps.googleusercontent.com",
+          "client_id": "269627309539-7qoe3s92nd4m4366q37joankrrdjeouh.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.kickfootnews",
             "certificate_hash": "19ee47947746206e108e0059568536324915c727"
+          }
+        },
+        {
+          "client_id": "269627309539-8nkn49p5cqed8s1mv450uh9ohv12i1km.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kickfootnews",
+            "certificate_hash": "38a4922efa004cddd6bae597141b8a10fb944e04"
+          }
+        },
+        {
+          "client_id": "269627309539-uaa5ft9cego11ql2gporjvomsispuppi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kickfootnews",
+            "certificate_hash": "6e4a5fdeaab7573ecb8a5274d158f5a3b2c12421"
           }
         },
         {
